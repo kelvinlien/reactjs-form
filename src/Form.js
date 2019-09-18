@@ -32,10 +32,10 @@ class Form extends React.Component{
 					<option value = '0'>Nam</option>
 					<option value = '1'>Nữ</option>
 				</select>
-				<label for = "Ngày sinh">
+				<label>
 				Ngày sinh
 				</label>
-				<input value = 'mm-dd-yyyy' type = 'date' className='dob' />
+				<input type = 'date' className='dob' />
 				</span>
 				</div>
 				</form>
