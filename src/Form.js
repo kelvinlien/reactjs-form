@@ -37,6 +37,10 @@ class Form extends React.Component{
 							<input type = 'date' className='dob' />
 						</span>
 					</div>
+					<div>Email</div>
+					<input type = 'email' className = 'email' />
+					<div>Điện thoại</div>
+					<input type = 'tel' className = 'phone' />
 				</form>
 				);
 	}
