@@ -34,7 +34,7 @@ class Form extends React.Component{
 							<label>
 							Ngày sinh
 							</label>
-							<input type = 'date' className='dob' value = {this.state.dob} />
+							<input type = 'date' className='dob' value = {this.state.dob} max = '2019-09-18' />
 						</span>
 					</div>
 					<div>Email</div>
@@ -65,6 +65,22 @@ class Form extends React.Component{
 							<option value = 'tch'>Phường Tân Chánh Hiệp</option>
 						</select>
 						<input type = 'text' className = 'street' />
+					</span>
+					<div>
+						<textarea placeholder="Ghi chú thêm chỉ dẫn về địa chỉ" cols = '50' rows = '3' />
+					</div>
+					<div>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Học vấn</div>
+					<span>
+						<select className = 'major'>
+							<option value = 'tn'>Thanh nhạc</option>
+							<option value = 'khmt'>Khoa học máy tính</option>
+							<option value = 'ktpm'>Kỹ thuật phần mềm</option>
+						</select>
+						<select className = 'college'>
+							<option value = 'uit'>Đại học Công nghệ thông tin - ĐHQG TPHCM</option>
+							<option value = 'bku'>Đại học Bách Khoa TPHCM</option>
+							<option value = 'nvhcm'>Nhạc Viện TPHCM</option>
+						</select>
 					</span>
 
 				</form>
