@@ -82,7 +82,59 @@ class Form extends React.Component{
 							<option value = 'nvhcm'>Nhạc Viện TPHCM</option>
 						</select>
 					</span>
-
+					<div>Kinh nghiệm </div>
+					<select className = 'graduated'>
+						<option value = 'ctn'>Chưa tốt nghiệp</option>
+						<option value = 'dtn'>Đã tốt nghiệp</option>
+					</select>
+					<div>Thời gian làm việc</div>
+					<select className = 'working-time'>
+						<option value = 'ft'>Có thể làm full-time</option>
+						<option value = 'pt'>Có thể làm part-time</option>
+					</select>
+					<div>Địa điểm làm việc</div>
+					<select className = 'workplace'>
+						<option value = 'home'>Chỉ có thể làm việc tại nhà</option>
+						<option value = 'hcm'>Có thể làm việc tại Chi nhánh RTA HCM</option>
+						<option value = 'hn'>Có thể làm việc tại Chi nhánh RTA HAN</option>
+					</select>
+					<div>Khả năng đi công tác xa?</div>
+					<select className = 'travel'>
+						<option value = 'y'>Có thể đi công tác xa</option>
+						<option value = 'n'>Không thể đi công tác xa</option>
+					</select>
+					<div>Khả năng làm việc online</div>
+					<select className = 'online'>
+						<option value = 'y'>Có thể làm việc online</option>
+						<option value = 'n'>Không thể làm việc online</option>
+					</select>
+					<div>Khả năng làm việc tại thực địa</div>
+					<select className = 'field-work'>
+						<option value = 'y'>Có thể làm việc tại thực địa</option>
+						<option value = 'n'>Không thể làm việc tại thực địa</option>
+					</select>
+					<div>Phương tiện di chuyển chủ yếu</div>
+					<select className = 'transport'>
+						<option value = 'bicycle'>Xe đạp</option>
+						<option value = 'bike'>Xe máy</option>
+						<option value = 'bus'>Xe buýt</option>
+						<option value = 'grab'>Xe ôm</option>
+						<option value = 'walk'>Đi bộ</option>
+						<option value = 'no-need'>Không có nhu cầu di chuyển</option>
+					</select>
+					<div>Mức độ sử dụng thành thạo smartphone/tablet</div>
+					<select className = 'sm-fluency'>
+						<option value = 'no'>Không biết</option>
+						<option value = 'normal'>Bình thường</option>
+						<option value = 'very'>Rất thành thạo</option>
+					</select>
+					<div>Smartphone/tablet sử dụng nhiều nhất</div>
+					<select className = 'sm-os'>
+						<option value = 'android'>Android</option>
+						<option value = 'iOS'>iOS</option>
+						<option value = 'WP'>Windows Phone (WP)</option>
+						<option value = 'no'>Chưa dùng</option>
+					</select>
 				</form>
 				);
 	}
