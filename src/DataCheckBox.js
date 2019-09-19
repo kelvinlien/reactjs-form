@@ -31,6 +31,10 @@ class DataCheckBox extends React.Component{
 				<input type = 'checkbox' className = 'none'/>
 				<label>Chưa có kinh nghiệm nào.</label>
 			</div>
+				<label>Mô tả thêm về kinh nghiệm, kỹ năng liên quan đến dữ liệu.</label>
+			<div>
+				<textarea className = 'more-info' rows = '4' cols = '60'/>
+			</div>
 
 
 		</form>
