@@ -8,18 +8,40 @@ class DataCheckBox extends React.Component{
 			experiences : 0
 		}
 	}
-	setState(){
-		this.state.experienced = !this.state.experienced;
+	debugger()
+	{
+		console.log(this.state.experienced);
+		console.log(this.state.experiences);
 	}
-	clickHandler(e){
-		
+	setState(bool, num){
+		this.state.experienced = bool;
+		this.state.experiences += num;
+	}
+	getExperiences()
+	{
+		return this.state.experiences;
+	}
+	changeHandler(e){
+		if (this.refs.complete.state.checked)
+		{
+			this.setState(true, 1);
+		}
+		else
+		{
+			this.setState(true,-1);
+			if(this.getExperiences() === 0)
+			{
+				this.setState(false,0);
+			}
+		}
+		this.debugger();
 	}
 	render(){
 		return(
 		<form id='DataCheckBox'>
 			<label for ='DataCheckBox'>Kinh nghiệm về dữ liệu</label>
 			<div>
-				<input type = 'checkbox' className = 'interviewer' id = 'interviewer'/>
+				<input type = 'checkbox' className = 'interviewer' id = 'interviewer' ref ='complete' onChange={e => this.changeHandler(e)} />
 				<label for = 'interviewer'>Đã từng làm điều tra viên/phỏng vấn viên.</label>
 			</div>
 			<div>

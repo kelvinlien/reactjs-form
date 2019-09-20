@@ -34,7 +34,7 @@ class Form extends React.Component{
 							<label>
 							Ngày sinh
 							</label>
-							<input type = 'date' className='dob' value = {this.state.dob} max = '2019-09-18' />
+							<input type = 'date' className='dob' value = {this.state.dob} max = '2019-09-20' />
 						</span>
 					</div>
 					<div>Email</div>
