@@ -7,31 +7,39 @@ class DataCheckBox extends React.Component{
 			experienced : false,
 			experiences : 0
 		}
+		this.changeHandler = this.changeHandler.bind(this);
+		this.getExperiences = this.getExperiences.bind(this);
 	}
 	debugger()
 	{
 		console.log(this.state.experienced);
 		console.log(this.state.experiences);
 	}
-	setState(bool, num){
-		this.state.experienced = bool;
-		this.state.experiences += num;
-	}
 	getExperiences()
 	{
 		return this.state.experiences;
 	}
 	changeHandler(e){
-		if (this.refs.complete.state.checked)
+		let isChecked = e.target.checked;
+		console.log('checked state: '+ isChecked);
+		if (isChecked)
 		{
-			this.setState(true, 1);
+			this.setState((state)=>({
+				experienced: true,
+				experiences : state.experiences += 1
+			}));
 		}
 		else
 		{
-			this.setState(true,-1);
+			this.setState(state => ({
+				experienced : true,
+				experiences : state.experiences += -1
+ 			}));
 			if(this.getExperiences() === 0)
 			{
-				this.setState(false,0);
+				this.setState(state => ({
+					experienced : false
+				}));
 			}
 		}
 		this.debugger();
@@ -41,11 +49,11 @@ class DataCheckBox extends React.Component{
 		<form id='DataCheckBox'>
 			<label for ='DataCheckBox'>Kinh nghiệm về dữ liệu</label>
 			<div>
-				<input type = 'checkbox' className = 'interviewer' id = 'interviewer' ref ='complete' onChange={e => this.changeHandler(e)} />
+				<input type = 'checkbox' className = 'interviewer' id = 'interviewer' onChange={e => this.changeHandler(e)}/>
 				<label for = 'interviewer'>Đã từng làm điều tra viên/phỏng vấn viên.</label>
 			</div>
 			<div>
-				<input type = 'checkbox' className = 'supervisor' id='supervisor'/>
+				<input type = 'checkbox' className = 'supervisor' id='supervisor' onChange={e => this.changeHandler(e)}/>
 				<label for='supervisor'>Đã từng làm giám sát viên.</label>
 			</div>
 			<div>
