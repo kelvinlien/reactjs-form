@@ -80,7 +80,7 @@ class DataCheckBox extends React.Component{
 	render(){
 		this.debugger();
 		return(
-		<form id='DataCheckBox'>
+		<div id='DataCheckBox'>
 			<label htmlFor ='DataCheckBox'>Kinh nghiệm về dữ liệu</label>
 			<div>
 				<input type = 'checkbox' className = 'interviewer' id = 'interviewer' onChange={e => this.changeHandler(e)}/>
@@ -106,7 +106,10 @@ class DataCheckBox extends React.Component{
 				<input type = 'checkbox' className = 'none' id='none' onChange={e => this.changeHandler(e)}/>
 				<label htmlFor='none'>Chưa có kinh nghiệm nào.</label>
 			</div>
-			{this.state.experienced === true &&
+			{this.state.experiences > 0 && this.state.none_checkstate === true &&
+				<div className = 'choose-again'>Lựa chọn có mâu thuẫn. Vui lòng chọn lại!</div>
+			}
+			{this.state.experienced === true  &&
 				<label className = 'more-info' htmlFor ='more-info'>Mô tả thêm về kinh nghiệm, kỹ năng liên quan đến dữ liệu.</label>
 			}
 			{this.state.experienced === true &&
@@ -115,7 +118,7 @@ class DataCheckBox extends React.Component{
 			</div>
 			}
 
-		</form>
+		</div>
 		);
 	}
 }export default DataCheckBox;

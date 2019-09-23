@@ -1,4 +1,6 @@
 import React from 'react';
+import DataCheckBox from './DataCheckBox';
+import DataRadioBox from './DataRadioBox';
 class Form extends React.Component{
 	constructor(props){
 		super(props);
@@ -135,6 +137,8 @@ class Form extends React.Component{
 						<option value = 'WP'>Windows Phone (WP)</option>
 						<option value = 'no'>Chưa dùng</option>
 					</select>
+					<DataCheckBox/>
+					<DataRadioBox/>
 				</form>
 				);
 	}

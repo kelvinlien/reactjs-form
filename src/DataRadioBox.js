@@ -5,7 +5,7 @@ class DataRadioBox extends React.Component{
 	}
 	render(){
 		return(
-		<form id='DataRadioBox'>
+		<div id='DataRadioBox'>
 			<label htmlFor='DataRadioBox'>Vị trí ứng tuyển</label>
 			<div>
   				<input type="radio" id="internrtlab" name='position'/>
@@ -31,7 +31,7 @@ class DataRadioBox extends React.Component{
 				<label htmlFor='project'>R&D Phát triển sản phẩm</label>
 			</div>
 
-		</form>
+		</div>
 		)
 	}
 }
