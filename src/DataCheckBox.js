@@ -18,8 +18,6 @@ class DataCheckBox extends React.Component{
 	changeHandler(e){
 		let isChecked = e.target.checked;
 		let id = e.target.id;
-		console.log('checked state: '+ isChecked);
-		console.log('id: '+id);
 		if(id !== 'none')
 		{
 			if(isChecked)
@@ -78,7 +76,6 @@ class DataCheckBox extends React.Component{
 	}
 
 	render(){
-		this.debugger();
 		return(
 		<div id='DataCheckBox'>
 			<label htmlFor ='DataCheckBox'>Kinh nghiệm về dữ liệu</label>
