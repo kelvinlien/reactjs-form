@@ -1,6 +1,7 @@
 import React from 'react';
 import DataCheckBox from './DataCheckBox';
 import DataRadioBox from './DataRadioBox';
+import SubmitButton from './SubmitButton';
 class Form extends React.Component{
 	constructor(props){
 		super(props);
@@ -139,6 +140,7 @@ class Form extends React.Component{
 					</select>
 					<DataCheckBox/>
 					<DataRadioBox/>
+					<SubmitButton/>
 				</form>
 				);
 	}
