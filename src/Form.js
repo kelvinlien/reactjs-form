@@ -14,13 +14,30 @@ class Form extends React.Component{
 				email : '',
 				phone : '',
 				userID : ''
+			},
+
+			maxDate : new Date()
 			}
+			this.getMaxDateFormat = this.getMaxDateFormat.bind(this);
 
 			}
-
-			}
- 
+ 	getMaxDateFormat(){
+		let dt = this.state.maxDate;
+  		let mm = dt.getMonth() + 1;
+  		let dd = dt.getDate();
+  		let yyyy = dt.getFullYear();
+  		 if(dd<10){
+        	dd='0'+dd
+    	} 
+    	if(mm<10){
+        	mm='0'+mm
+    	} 
+  			let format = yyyy + '-' + mm + '-' + dd
+			console.log('format: ' + format);
+			return format;
+ 	}
 		render(){
+			console.log('date time: ' + this.state.maxDate.toLocaleDateString());
 			return(
 				<form>
 					<h1>Phiếu ứng tuyển việc làm</h1>
@@ -37,7 +54,7 @@ class Form extends React.Component{
 							<label>
 							Ngày sinh
 							</label>
-							<input type = 'date' className='dob' value = {this.state.dob} max = '2019-09-20' />
+							<input type = 'date' className='dob' value = {this.state.dob} max = {this.getMaxDateFormat()} />
 						</span>
 					</div>
 					<div>Email</div>
@@ -143,6 +160,6 @@ class Form extends React.Component{
 					<SubmitButton/>
 				</form>
 				);
-	}
+ 	}
 }
 export default Form;
