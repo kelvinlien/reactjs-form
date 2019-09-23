@@ -104,14 +104,14 @@ class DataCheckBox extends React.Component{
 				<label htmlFor='none'>Chưa có kinh nghiệm nào.</label>
 			</div>
 			{this.state.experiences > 0 && this.state.none_checkstate === true &&
-				<div className = 'choose-again'>Lựa chọn có mâu thuẫn. Vui lòng chọn lại!</div>
+				<div className="alert alert-danger" role="alert" >Lựa chọn có mâu thuẫn. Vui lòng chọn lại!</div>
 			}
 			{this.state.experienced === true  &&
 				<label className = 'more-info' htmlFor ='more-info'>Mô tả thêm về kinh nghiệm, kỹ năng liên quan đến dữ liệu.</label>
 			}
 			{this.state.experienced === true &&
 			<div>
-				<textarea className = 'more-info' rows = '4' cols = '60' id = 'more-info' />
+				<textarea className = 'form-control' rows = '4' cols = '60' id = 'more-info' />
 			</div>
 			}
 

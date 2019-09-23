@@ -41,16 +41,22 @@ class Form extends React.Component{
 			return(
 				<form>
 					<h1>Phiếu ứng tuyển việc làm</h1>
-					<span>Ảnh
-						<input className="UserPic" value={this.state.picture} type = 'file' id='userPic'/>
-					</span>
-					<input placeholder="Họ tên" className='fullname' type='text' value={this.state.fullName}/>
-					<div>
+					<div className = 'form-group row'>
+						<div className = 'col-xs-6'>
+							<span>Ảnh
+								<input className="form-control" value={this.state.picture} type = 'file' id='userPic'/>
+							</span>
+						</div>
+						<div className = 'col-xs-6'>
+							<input placeholder="Họ tên" className='form-control' type='text' value={this.state.fullName}/>
+						</div>
+					</div>
+					<div >
+						<span className = 'btn-group btn-group-xs' >
+							<button type="button" className="btn btn-light" size value = 'nam'>Nam</button>
+							<button type="button" className="btn btn-light" value = 'nu'>Nữ</button>
+						</span>
 						<span>
-							<select className='gender' value={this.state.gender}>
-								<option value = '0'>Nam</option>
-								<option value = '1'>Nữ</option>
-							</select>
 							<label>
 							Ngày sinh
 							</label>
@@ -58,11 +64,14 @@ class Form extends React.Component{
 						</span>
 					</div>
 					<div>Email</div>
-					<input type = 'email' className = 'email' value = {this.state.email}/>
+					<input type = 'email' className = 'form-control' value = {this.state.email}/>
+					<small id="emailHelp" className="form-text text-muted">RTA sẽ gửi 1 email thông tin tài khoản ứng viên đến địa chỉ email bạn đã cung cấp ở đây. Vì vậy, bạn vui lòng sử dụng email thật khi đăng ký.</small>
 					<div>Điện thoại</div>
-					<input type = 'tel' className = 'phone' value = {this.state.phone}/>
+					<input type = 'tel' className = 'form-control' value = {this.state.phone}/>
+					<small id="emailHelp" className="form-text text-muted">Vui lòng cung cấp SĐT thật vì bộ phận Tuyển dụng RTA sẽ liên hệ PV qua SĐT này.</small>
 					<div>CMND/CCCD/Hộ chiếu</div>
-					<input type = 'number' className = 'userID' value = {this.state.userID}/>
+					<input type = 'number' className = 'form-control' value = {this.state.userID}/>
+					<small id="emailHelp" className="form-text text-muted">Thông tin này sẽ được dùng làm tên đăng nhập (username) tài khoản ứng viên RTA.</small>
 					<div>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Địa chỉ liên hệ</div>
 					<div>Tỉnh/TP &emsp; &emsp; &emsp; &emsp; &emsp; Quận/Huyện</div>
 					<span>
@@ -87,7 +96,7 @@ class Form extends React.Component{
 						<input type = 'text' className = 'street' />
 					</span>
 					<div>
-						<textarea placeholder="Ghi chú thêm chỉ dẫn về địa chỉ" cols = '50' rows = '3' />
+						<textarea placeholder="Ghi chú thêm chỉ dẫn về địa chỉ" cols = '50' rows = '3' className = 'form-control'/>
 					</div>
 					<div>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Học vấn</div>
 					<span>
@@ -103,58 +112,58 @@ class Form extends React.Component{
 						</select>
 					</span>
 					<div>Kinh nghiệm </div>
-					<select className = 'graduated'>
-						<option value = 'ctn'>Chưa tốt nghiệp</option>
-						<option value = 'dtn'>Đã tốt nghiệp</option>
-					</select>
+						<div className = 'btn-group btn-group-xs'>
+							<button type="button" className="btn btn-light" size value = 'chuatn'>Chưa tốt nghiệp</button>
+							<button type="button" className="btn btn-light" value = 'datn'>Đã tốt nghiệp</button>
+						</div>
 					<div>Thời gian làm việc</div>
-					<select className = 'working-time'>
-						<option value = 'ft'>Có thể làm full-time</option>
-						<option value = 'pt'>Có thể làm part-time</option>
-					</select>
+						<div className = 'btn-group btn-group-xs'>
+							<button type="button" className="btn btn-light" size value = 'ft'>Có thể làm full-time</button>
+							<button type="button" className="btn btn-light" value = 'pt'>Có thể làm part-time</button>
+						</div>
 					<div>Địa điểm làm việc</div>
-					<select className = 'workplace'>
-						<option value = 'home'>Chỉ có thể làm việc tại nhà</option>
-						<option value = 'hcm'>Có thể làm việc tại Chi nhánh RTA HCM</option>
-						<option value = 'hn'>Có thể làm việc tại Chi nhánh RTA HAN</option>
-					</select>
+						<div className = 'btn-group btn-group-xs'>
+							<button type="button" className="btn btn-light" size value = 'home'>Chỉ có thể làm việc tại nhà</button>
+							<button type="button" className="btn btn-light" value = 'hcm'>Có thể làm việc tại Chi nhánh RTA HCM</button>
+							<button type='button' className='btn btn-light' value ='hn'>Có thể làm việc tại Chi nhánh RTA HAN</button>
+						</div>
 					<div>Khả năng đi công tác xa?</div>
-					<select className = 'travel'>
-						<option value = 'y'>Có thể đi công tác xa</option>
-						<option value = 'n'>Không thể đi công tác xa</option>
-					</select>
-					<div>Khả năng làm việc online</div>
-					<select className = 'online'>
-						<option value = 'y'>Có thể làm việc online</option>
-						<option value = 'n'>Không thể làm việc online</option>
-					</select>
+						<div className = 'btn-group btn-group-xs'>
+							<button type="button" className="btn btn-light" size value = 'y'>Có thể đi công tác xa</button>
+							<button type="button" className="btn btn-light" value = 'n'>Không thể đi công tác xa</button>
+						</div>
+						<div>Khả năng làm việc online</div>
+						<div className = 'btn-group btn-group-xs'>
+							<button type="button" className="btn btn-light" size value = 'online'>Có thể làm việc online</button>
+							<button type="button" className="btn btn-light" value = 'offline'>Không thể làm việc online</button>
+						</div>
 					<div>Khả năng làm việc tại thực địa</div>
-					<select className = 'field-work'>
-						<option value = 'y'>Có thể làm việc tại thực địa</option>
-						<option value = 'n'>Không thể làm việc tại thực địa</option>
-					</select>
+						<div className = 'btn-group btn-group-xs'>
+							<button type="button" className="btn btn-light" size value = 'yfield-work'>Có thể làm việc tại thực địa</button>
+							<button type="button" className="btn btn-light" value = 'nfield-work'>Không thể làm việc tại thực địa</button>
+						</div>
 					<div>Phương tiện di chuyển chủ yếu</div>
-					<select className = 'transport'>
-						<option value = 'bicycle'>Xe đạp</option>
-						<option value = 'bike'>Xe máy</option>
-						<option value = 'bus'>Xe buýt</option>
-						<option value = 'grab'>Xe ôm</option>
-						<option value = 'walk'>Đi bộ</option>
-						<option value = 'no-need'>Không có nhu cầu di chuyển</option>
-					</select>
+						<div className = 'btn-group btn-group-xs'>
+							<button type="button" className="btn btn-light" size value = 'bicycle'>Xe đạp</button>
+							<button type="button" className="btn btn-light" value = 'bike'>Xe máy</button>
+							<button type="button" className="btn btn-light" size value = 'bus'>Xe buýt</button>
+							<button type="button" className="btn btn-light" value = 'grab'>Xe ôm</button>
+							<button type="button" className="btn btn-light" size value = 'walk'>Đi bộ</button>
+							<button type="button" className="btn btn-light" value = 'no-transport'>Không có nhu cầu di chuyển</button>
+						</div>
 					<div>Mức độ sử dụng thành thạo smartphone/tablet</div>
-					<select className = 'sm-fluency'>
-						<option value = 'no'>Không biết</option>
-						<option value = 'normal'>Bình thường</option>
-						<option value = 'very'>Rất thành thạo</option>
-					</select>
+						<div className = 'btn-group btn-group-xs'>
+							<button type="button" className="btn btn-light" size value = 'no_fluency'>Không biết</button>
+							<button type="button" className="btn btn-light" value = 'normal_fluency'>Bình thường</button>
+							<button type="button" className="btn btn-light" value = 'high_fluency'>Rất thành thạo</button>
+						</div>
 					<div>Smartphone/tablet sử dụng nhiều nhất</div>
-					<select className = 'sm-os'>
-						<option value = 'android'>Android</option>
-						<option value = 'iOS'>iOS</option>
-						<option value = 'WP'>Windows Phone (WP)</option>
-						<option value = 'no'>Chưa dùng</option>
-					</select>
+						<div className = 'btn-group btn-group-xs'>
+							<button type="button" className="btn btn-light" size value = 'android'>Android</button>
+							<button type="button" className="btn btn-light" value = 'ios'>iOS</button>
+							<button type="button" className="btn btn-light" size value = 'wp'>Windows Phone (WP)</button>
+							<button type="button" className="btn btn-light" value = 'no_os'>Chưa dùng</button>
+						</div>
 					<DataCheckBox/>
 					<DataRadioBox/>
 					<SubmitButton/>

@@ -10,7 +10,7 @@ class SubmitButton extends React.Component{
 	}
 	render(){
 		return(
-		<input type ='submit' id='submit' className = 'submit' onClick = {e => this.submitHandler(e)} value = 'HOÀNH THÀNH & GỬI'/>
+		<input type ='submit' id='submit' className = "btn btn-success" onClick = {e => this.submitHandler(e)} value = 'HOÀN THÀNH & GỬI'/>
 		)
 	}
 }
