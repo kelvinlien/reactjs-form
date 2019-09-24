@@ -79,9 +79,9 @@ class DataCheckBox extends React.Component{
 		return(
 		<div id='DataCheckBox'>
 			<label htmlFor ='DataCheckBox'>Kinh nghiệm về dữ liệu</label>
-			<div>
-				<input type = 'checkbox' className = 'interviewer' id = 'interviewer' onChange={e => this.changeHandler(e)}/>
-				<label htmlFor = 'interviewer'>Đã từng làm điều tra viên/phỏng vấn viên.</label>
+			<div className = 'custom-control custom-checkbox'>
+				<input type = 'checkbox' className = 'custom-control-input' id = 'interviewer' onChange={e => this.changeHandler(e)}/>
+				<label className = 'custom-control-label' htmlFor = 'interviewer'>Đã từng làm điều tra viên/phỏng vấn viên.</label>
 			</div>
 			<div>
 				<input type = 'checkbox' className = 'supervisor' id='supervisor' onChange={e => this.changeHandler(e)}/>

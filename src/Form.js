@@ -41,32 +41,31 @@ class Form extends React.Component{
 			return(
 				<form>
 					<h1>Phiếu ứng tuyển việc làm</h1>
-					<div className = 'form-group row'>
-						<div className = 'col-xs-6'>
-							<span>Ảnh
+					<div className = 'container'>
+						<div className = 'row'>
+							<div className = 'col-lg-4'>Ảnh
 								<input className="form-control" value={this.state.picture} type = 'file' id='userPic'/>
-							</span>
+							</div>
+							<div className = 'col-lg-8'>
+								<input placeholder="Họ tên" className='form-control' type='text' value={this.state.fullName}/>
+							</div>
 						</div>
-						<div className = 'col-xs-6'>
-							<input placeholder="Họ tên" className='form-control' type='text' value={this.state.fullName}/>
+						<div className = 'row'>
+							<div className = 'btn-group btn-group-xs' >
+								<button type="button" className="btn btn-light" size value = 'nam'>Nam</button>
+								<button type="button" className="btn btn-light" value = 'nu'>Nữ</button>
+							</div>
+							<div className = 'col-lg-5'>
+								<label>
+								Ngày sinh
+								</label>
+								<input type = 'date' className='dob' value = {this.state.dob} max = {this.getMaxDateFormat()} />
+							</div>
 						</div>
-					</div>
-					<div >
-						<span className = 'btn-group btn-group-xs' >
-							<button type="button" className="btn btn-light" size value = 'nam'>Nam</button>
-							<button type="button" className="btn btn-light" value = 'nu'>Nữ</button>
-						</span>
-						<span>
-							<label>
-							Ngày sinh
-							</label>
-							<input type = 'date' className='dob' value = {this.state.dob} max = {this.getMaxDateFormat()} />
-						</span>
-					</div>
-					<div>Email</div>
-					<input type = 'email' className = 'form-control' value = {this.state.email}/>
-					<small id="emailHelp" className="form-text text-muted">RTA sẽ gửi 1 email thông tin tài khoản ứng viên đến địa chỉ email bạn đã cung cấp ở đây. Vì vậy, bạn vui lòng sử dụng email thật khi đăng ký.</small>
-					<div>Điện thoại</div>
+						<div>Email</div>
+						<input type = 'email' className = 'form-control' value = {this.state.email}/>
+						<small id="emailHelp" className="form-text text-muted">RTA sẽ gửi 1 email thông tin tài khoản ứng viên đến địa chỉ email bạn đã cung cấp ở đây. Vì vậy, bạn vui lòng sử dụng email thật khi đăng ký.</small>
+						<div>Điện thoại</div>
 					<input type = 'tel' className = 'form-control' value = {this.state.phone}/>
 					<small id="emailHelp" className="form-text text-muted">Vui lòng cung cấp SĐT thật vì bộ phận Tuyển dụng RTA sẽ liên hệ PV qua SĐT này.</small>
 					<div>CMND/CCCD/Hộ chiếu</div>
@@ -167,6 +166,7 @@ class Form extends React.Component{
 					<DataCheckBox/>
 					<DataRadioBox/>
 					<SubmitButton/>
+					</div>
 				</form>
 				);
  	}
