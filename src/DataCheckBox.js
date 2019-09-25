@@ -31,7 +31,7 @@ class DataCheckBox extends React.Component{
 			{
 				if(this.state.experiences === 1)
 				{
-					this.setState(state => ({
+					this.setState(() => ({
 						experienced : false
 					}));
 				}
@@ -41,7 +41,7 @@ class DataCheckBox extends React.Component{
 			}
 			if(this.state.none_checkstate === true)
 			{
-				this.setState(state => ({
+				this.setState(() => ({
 					experienced : false
 				}));
 			}
@@ -50,7 +50,7 @@ class DataCheckBox extends React.Component{
 		{
 			if(isChecked)
 			{
-				this.setState(state => ({
+				this.setState(() => ({
 					experienced : false,
 					none_checkstate : true
 				}));
@@ -59,14 +59,14 @@ class DataCheckBox extends React.Component{
 			{
 				if(this.state.experiences === 0)
 				{
-					this.setState(state => ({
+					this.setState(() => ({
 						experienced : false,
 						none_checkstate : false
 					}));
 				}
 				else
 				{
-					this.setState(state =>({
+					this.setState(() =>({
 						experienced : true,
 						none_checkstate : false
 					}));

@@ -21,7 +21,7 @@ class DataRadioBox extends React.Component{
 			checked : true
 		}));
 		let id = e.target.id;
-		console.log('id: '+id);
+		//console.log('id: '+id);
 		if(id === 'customerSp' || id === 'technicalSp')
 		{
 			this.setState(() =>({
@@ -45,7 +45,7 @@ class DataRadioBox extends React.Component{
 		}
 	}
 	render(){
-		this.debugger();
+		//this.debugger();
 		return(
 		<div id='DataRadioBox'>
 			<label htmlFor='DataRadioBox'>Vị trí ứng tuyển</label>

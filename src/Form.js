@@ -2,6 +2,7 @@ import React from 'react';
 import DataCheckBox from './DataCheckBox';
 import DataRadioBox from './DataRadioBox';
 import SubmitButton from './SubmitButton';
+import Select from 'react-select';
 class Form extends React.Component{
 	constructor(props){
 		super(props);
@@ -13,12 +14,30 @@ class Form extends React.Component{
 				dob : '',
 				email : '',
 				phone : '',
-				userID : ''
+				userID : '',
+				city : '',
+				district : '',
+				ward : ''
 			},
+			setAddress : 0,
+			address : {
+				'Tp.Hồ Chí Minh' : {
+					'Quận 1' : ['Phường Bến Nghé', 'Phường Bến Thành'],
+					'Quận 12' : ['Phường Tân Chánh Hiệp', 'Phường Tân Thới Hiệp', 'Phường Hiệp Thành']
+				},
+				'Tp.Cần Thơ' : {
+					'Quận Ninh Kiều' : ['Phường Hưng Lợi', 'Phường An Cư'],
+					'Quận Thốt Nốt' : ['Phường Thốt Nốt', 'Phường Thuận Hưng'],
+					'Huyện Vĩnh Thạnh' : ['Xã Thạnh An', 'Xã Thạnh Lộc', 'Xã Thạnh Lợi']
+				}
+			},
+
 
 			maxDate : new Date()
 			}
 			this.getMaxDateFormat = this.getMaxDateFormat.bind(this);
+			this.loadSelectOptions = this.loadSelectOptions.bind(this);
+			this.checkAddressFormat = this.checkAddressFormat.bind(this);
 
 			}
  	getMaxDateFormat(){
@@ -33,11 +52,74 @@ class Form extends React.Component{
         	mm='0'+mm
     	} 
   			let format = yyyy + '-' + mm + '-' + dd
-			console.log('format: ' + format);
 			return format;
  	}
+ 	loadSelectOptions(a, b){//load the select options according to the prior choice in the address hierarchy. Input a is an object or array of addresses to load into select options, b is the position of that selection in the address hierarchy.
+ 		let options = [];
+ 		if (Array.isArray(a))
+ 		{
+ 			console.log('wards incoming');
+ 			a.forEach( function(element, index) {
+ 				let obj = {value : element, label : element, id : b};
+ 				options.push(obj);
+ 			});
+ 		}
+ 		else
+ 		{
+ 			for(let key in a)
+ 			{
+ 				let obj = {value : key, label : key, id : b};
+ 				options.push(obj);
+ 			}
+ 		}
+ 		return <Select options = {options} onChange = {(selectedOption) => this.checkAddressFormat(selectedOption)}/>
+ 	}
+ 	checkAddressFormat(selectedOption){//onChange function, setState and assign address value for newUser.
+ 		let val = selectedOption.value;
+ 		let b = selectedOption.id;
+	 	let c = this.state.newUser.district;
+ 		if(b == 'city' && ((this.state.newUser.district === '' && this.state.setAddress === 0) || (this.state.setAddress >0)))
+ 		{
+ 			this.setState(prevState =>({
+ 				newUser : {
+ 					...prevState.newUser,
+ 					city : val,
+ 					district : '',
+ 					ward : ''
+ 				},
+ 				setAddress : prevState.setAddress + 1
+ 			}));
+ 		}
+ 		else if(b == 'district' && ((this.state.newUser.ward === '' && this.state.setAddress === 0)|| (this.state.setAddress > 0)))
+ 		{
+ 			this.setState(prevState =>({
+ 				newUser : {
+ 					...prevState.newUser,
+ 					district : val,
+ 					ward : ''
+ 				}
+ 			}));
+ 		}
+ 		else if(b== 'ward' && this.state.newUser.ward !== val)
+ 		{
+ 			this.setState(prevState => ({
+ 				newUser : {
+ 					...prevState.newUser,
+ 					ward : val
+ 				}
+ 			}));
+ 		}
+ 		else
+ 		{
+ 			console.log(this.state.newUser);
+ 			console.log(val + typeof(val));
+ 			console.log('something went wrong');
+ 		}
+ 	}
+
 		render(){
-			console.log('date time: ' + this.state.maxDate.toLocaleDateString());
+			console.log(this.state.newUser);
+			//this.getDataSource(this.state.address, 'city');
 			return(
 				<form>
 					<div className = 'jumbotron text-left'>
@@ -54,7 +136,7 @@ class Form extends React.Component{
     							</div>
     						</div>
 							<div className = 'col-lg-9'>
-								<input placeholder="Họ tên" className='form-control' type='text' value={this.state.fullName}/>
+								<input placeholder="Họ tên" className='form-control' type='text' value={this.state.newUser.fullName}/>
 							</div>
 						</div>
 						<div className = 'row'>
@@ -84,28 +166,17 @@ class Form extends React.Component{
 						<div className = 'row'>
 							<div className = 'col'>
 								<div className = 'text-center'>Tỉnh/TP</div>
-								<select className='custom-select'>
-									<option value = 'hcm'>Tp.Hồ Chí Minh</option>
-									<option value = 'hn'>Tp.Hà Nội</option>
-									<option value = 'ct'>Tp.Cần Thơ</option>
-								</select>
+								{this.loadSelectOptions(this.state.address, 'city')}
 							</div>
 							<div className = 'col'>
 								<div className = 'text-center'>Quận/Huyện</div>
-								<select className='custom-select' >
-									<option value = 'q1'>Quận 1</option>
-									<option value = 'q12'>Quận 12</option>
-									<option value = 'q3'>Quận 3</option>
-								</select>
+								{(this.state.newUser.city !=='')? this.loadSelectOptions(this.state.address[this.state.newUser.city], 'district') : this.loadSelectOptions({},'')}
 							</div>
 						</div>
 						<div className = 'row'>
 							<div className = 'col'>
 								<div className = 'text-center'>Phường/Xã</div>
-								<select className='custom-select'>
-									<option value = 'dk'>Phường Đa Kao</option>
-									<option value = 'tch'>Phường Tân Chánh Hiệp</option>
-								</select>
+								{(this.state.newUser.city !=='' && this.state.newUser.district !== '')? this.loadSelectOptions(this.state.address[this.state.newUser.city][this.state.newUser.district], 'ward') : this.loadSelectOptions({},'')}
 							</div>
 							<div className = 'col'>
 								<div className = 'text-center'>Số nhà - Đường</div>
@@ -134,55 +205,55 @@ class Form extends React.Component{
 						</div>
 						<div>Kinh nghiệm </div>
 						<div className = 'btn-group btn-group-xs'>
-							<button type="button" className="btn btn-light" size value = 'chuatn'>Chưa tốt nghiệp</button>
+							<button type="button" className="btn btn-light" value = 'chuatn'>Chưa tốt nghiệp</button>
 							<button type="button" className="btn btn-light" value = 'datn'>Đã tốt nghiệp</button>
 						</div>
 						<div>Thời gian làm việc</div>
 						<div className = 'btn-group btn-group-xs'>
-							<button type="button" className="btn btn-light" size value = 'ft'>Có thể làm full-time</button>
+							<button type="button" className="btn btn-light" value = 'ft'>Có thể làm full-time</button>
 							<button type="button" className="btn btn-light" value = 'pt'>Có thể làm part-time</button>
 						</div>
 						<div>Địa điểm làm việc</div>
 						<div className = 'btn-group btn-group-xs'>
-							<button type="button" className="btn btn-light" size value = 'home'>Chỉ có thể làm việc tại nhà</button>
+							<button type="button" className="btn btn-light" value = 'home'>Chỉ có thể làm việc tại nhà</button>
 							<button type="button" className="btn btn-light" value = 'hcm'>Có thể làm việc tại Chi nhánh RTA HCM</button>
 							<button type='button' className='btn btn-light' value ='hn'>Có thể làm việc tại Chi nhánh RTA HAN</button>
 						</div>
 						<div>Khả năng đi công tác xa?</div>
 						<div className = 'btn-group btn-group-xs'>
-							<button type="button" className="btn btn-light" size value = 'y'>Có thể đi công tác xa</button>
+							<button type="button" className="btn btn-light" value = 'y'>Có thể đi công tác xa</button>
 							<button type="button" className="btn btn-light" value = 'n'>Không thể đi công tác xa</button>
 						</div>
 						<div>Khả năng làm việc online</div>
 						<div className = 'btn-group btn-group-xs'>
-							<button type="button" className="btn btn-light" size value = 'online'>Có thể làm việc online</button>
+							<button type="button" className="btn btn-light" value = 'online'>Có thể làm việc online</button>
 							<button type="button" className="btn btn-light" value = 'offline'>Không thể làm việc online</button>
 						</div>
 						<div>Khả năng làm việc tại thực địa</div>
 						<div className = 'btn-group btn-group-xs'>
-							<button type="button" className="btn btn-light" size value = 'yfield-work'>Có thể làm việc tại thực địa</button>
+							<button type="button" className="btn btn-light" value = 'yfield-work'>Có thể làm việc tại thực địa</button>
 							<button type="button" className="btn btn-light" value = 'nfield-work'>Không thể làm việc tại thực địa</button>
 						</div>
 						<div>Phương tiện di chuyển chủ yếu</div>
 						<div className = 'btn-group btn-group-xs'>
-							<button type="button" className="btn btn-light" size value = 'bicycle'>Xe đạp</button>
+							<button type="button" className="btn btn-light" value = 'bicycle'>Xe đạp</button>
 							<button type="button" className="btn btn-light" value = 'bike'>Xe máy</button>
-							<button type="button" className="btn btn-light" size value = 'bus'>Xe buýt</button>
+							<button type="button" className="btn btn-light" value = 'bus'>Xe buýt</button>
 							<button type="button" className="btn btn-light" value = 'grab'>Xe ôm</button>
-							<button type="button" className="btn btn-light" size value = 'walk'>Đi bộ</button>
+							<button type="button" className="btn btn-light" value = 'walk'>Đi bộ</button>
 							<button type="button" className="btn btn-light" value = 'no-transport'>Không có nhu cầu di chuyển</button>
 						</div>
 						<div>Mức độ sử dụng thành thạo smartphone/tablet</div>
 						<div className = 'btn-group btn-group-xs'>
-							<button type="button" className="btn btn-light" size value = 'no_fluency'>Không biết</button>
+							<button type="button" className="btn btn-light" value = 'no_fluency'>Không biết</button>
 							<button type="button" className="btn btn-light" value = 'normal_fluency'>Bình thường</button>
 							<button type="button" className="btn btn-light" value = 'high_fluency'>Rất thành thạo</button>
 						</div>
 						<div>Smartphone/tablet sử dụng nhiều nhất</div>
 						<div className = 'btn-group btn-group-xs'>
-							<button type="button" className="btn btn-light" size value = 'android'>Android</button>
+							<button type="button" className="btn btn-light" value = 'android'>Android</button>
 							<button type="button" className="btn btn-light" value = 'ios'>iOS</button>
-							<button type="button" className="btn btn-light" size value = 'wp'>Windows Phone (WP)</button>
+							<button type="button" className="btn btn-light" value = 'wp'>Windows Phone (WP)</button>
 							<button type="button" className="btn btn-light" value = 'no_os'>Chưa dùng</button>
 						</div>
 						<DataCheckBox/>
