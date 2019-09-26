@@ -18,7 +18,9 @@ class Form extends React.Component{
 				userID : '',
 				city : '',
 				district : '',
-				ward : ''
+				ward : '',
+				major : '',
+				college : ''
 			},
 			setAddress : 0,
 			address : {
@@ -32,6 +34,21 @@ class Form extends React.Component{
 					'Huyện Vĩnh Thạnh' : ['Xã Thạnh An', 'Xã Thạnh Lộc', 'Xã Thạnh Lợi']
 				}
 			},
+			majors : [
+				'Thanh nhạc',
+				'Khoa học máy tính',
+				'Toán - Tin',
+				'Kỹ thuật phần mềm',
+				'Hệ thống thông tin',
+				'Cơ điện tử'
+			],
+			colleges : [
+				'Đại học Bách Khoa TPHCM',
+				'Đại học Khoa học Tự nhiên TPHCM',
+				'Đại học Công nghệ thông tin - ĐHQG TPHCM',
+				'Nhạc viện TPHCM',
+				'Đại học Công nghiệp TPHCM'
+			],
 
 
 			maxDate : new Date()
@@ -78,42 +95,59 @@ class Form extends React.Component{
  	checkAddressFormat(selectedOption){//onChange function, setState and assign address value for newUser.
  		let val = selectedOption.value;
  		let b = selectedOption.id;
-	 	let c = this.state.newUser.district;
- 		if(b == 'city' && ((this.state.newUser.district === '' && this.state.setAddress === 0) || (this.state.setAddress >0)))
+ 		if (b == 'city' || b == 'district' || b =='ward')
  		{
- 			this.setState(prevState =>({
- 				newUser : {
- 					...prevState.newUser,
- 					city : val,
- 					district : '',
- 					ward : ''
- 				},
- 				setAddress : prevState.setAddress + 1
- 			}));
+ 			if(b == 'city' && ((this.state.newUser.district === '' && this.state.setAddress === 0) || (this.state.setAddress >0)))
+ 			{
+ 				this.setState(prevState =>({
+ 					newUser : {
+ 						...prevState.newUser,
+ 						city : val,
+ 						district : '',
+ 						ward : ''
+ 					},
+ 					setAddress : prevState.setAddress + 1
+ 				}));
+ 			}
+ 			else if(b == 'district' && ((this.state.newUser.ward === '' && this.state.setAddress === 0)|| (this.state.setAddress > 0)))
+ 			{
+ 				this.setState(prevState =>({
+ 					newUser : {
+ 						...prevState.newUser,
+ 						district : val,
+ 						ward : ''
+ 					}
+ 				}));
+ 			}
+ 			else if(b== 'ward' && this.state.newUser.ward !== val)
+ 			{
+ 				this.setState(prevState => ({
+ 					newUser : {
+ 						...prevState.newUser,
+ 						ward : val
+ 					}
+ 				}));
+ 			}
  		}
- 		else if(b == 'district' && ((this.state.newUser.ward === '' && this.state.setAddress === 0)|| (this.state.setAddress > 0)))
+ 		else if ( b == 'college' || b == 'major')
  		{
- 			this.setState(prevState =>({
+ 			((b == 'college')? this.setState(prevState => ({
  				newUser : {
  					...prevState.newUser,
- 					district : val,
- 					ward : ''
+ 					college : val
  				}
- 			}));
- 		}
- 		else if(b== 'ward' && this.state.newUser.ward !== val)
- 		{
- 			this.setState(prevState => ({
+ 			})) : this.setState(prevState => ({
  				newUser : {
  					...prevState.newUser,
- 					ward : val
+ 					major : val
  				}
- 			}));
+ 			})));
  		}
  		else
  		{
  			console.log(this.state.newUser);
  			console.log(val + typeof(val));
+ 			console.log(b + typeof(b));
  			console.log('something went wrong');
  		}
  	}
@@ -128,7 +162,7 @@ class Form extends React.Component{
 					</div>
 					<div className = 'container'>
 						<div className = 'row'>
-							<div className = 'col-lg-3'>
+							<div className = 'col-lg-4'>
 						    	<div className="input-group mb-3">
       								<div className="input-group-prepend">
         								<span className="input-group-text fa fa-camera"/>
@@ -136,7 +170,7 @@ class Form extends React.Component{
       								<input type="file" className="form-control" placeholder="Username" id="userPic" value = {this.state.newUser.picture}/>
     							</div>
     						</div>
-							<div className = 'col-lg-9'>
+							<div className = 'col-lg-8'>
 								<input placeholder="Họ tên" className='form-control' type='text' value={this.state.newUser.fullName}/>
 							</div>
 						</div>
@@ -192,18 +226,10 @@ class Form extends React.Component{
 						<div className = 'text-center'>Học vấn</div>
 						<div className = 'row'>
 							<div className = 'col'>
-								<select className = 'custom-select'>
-									<option value = 'tn'>Thanh nhạc</option>
-									<option value = 'khmt'>Khoa học máy tính</option>
-									<option value = 'ktpm'>Kỹ thuật phần mềm</option>
-								</select>
+								{this.loadSelectOptions(this.state.majors,'major')}
 							</div>
 							<div className = 'col'>
-								<select className = 'custom-select'>
-									<option value = 'uit'>Đại học Công nghệ thông tin - ĐHQG TPHCM</option>
-									<option value = 'bku'>Đại học Bách Khoa TPHCM</option>
-									<option value = 'nvhcm'>Nhạc Viện TPHCM</option>
-								</select>
+								{this.loadSelectOptions(this.state.colleges, 'college')}
 							</div>
 						</div>
 						<div>Kinh nghiệm </div>
