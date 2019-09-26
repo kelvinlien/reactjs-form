@@ -3,6 +3,7 @@ import DataCheckBox from './DataCheckBox';
 import DataRadioBox from './DataRadioBox';
 import SubmitButton from './SubmitButton';
 import Select from 'react-select';
+import './Form.css';
 class Form extends React.Component{
 	constructor(props){
 		super(props);
@@ -141,9 +142,11 @@ class Form extends React.Component{
 						</div>
 						<div className = 'row'>
 							<div className = 'col'>
-								<div className = 'btn-group btn-group-lg' >
-									<button type="button" className="btn btn-light" value = 'nam'>Nam</button>
-									<button type="button" className="btn btn-light" value = 'nu'>Nữ</button>
+								<div className = 'radio-toolbar' >
+									<input type="radio"  value = 'nam' name = 'gender' id='genderMale'/>
+									<label htmlFor = 'genderMale' >Nam</label>
+									<input type="radio" value = 'nu' name = 'gender' id='genderFemale'/>
+									<label htmlFor = 'genderFemale'>Nữ</label>
 								</div>
 							</div>
 							<div className = 'col'>
@@ -204,57 +207,83 @@ class Form extends React.Component{
 							</div>
 						</div>
 						<div>Kinh nghiệm </div>
-						<div className = 'btn-group btn-group-xs'>
-							<button type="button" className="btn btn-light" value = 'chuatn'>Chưa tốt nghiệp</button>
-							<button type="button" className="btn btn-light" value = 'datn'>Đã tốt nghiệp</button>
+						<div className = 'radio-toolbar' >
+							<input type="radio"  value = 'datn' name = 'graduate' id='graduated'/>
+							<label htmlFor = 'graduated' >Đã tốt nghiệp</label>
+							<input type="radio" value = 'tn' name = 'graduate' id='under-grad'/>
+							<label htmlFor = 'under-grad'>Chưa tốt nghiệp</label>
 						</div>
 						<div>Thời gian làm việc</div>
-						<div className = 'btn-group btn-group-xs'>
-							<button type="button" className="btn btn-light" value = 'ft'>Có thể làm full-time</button>
-							<button type="button" className="btn btn-light" value = 'pt'>Có thể làm part-time</button>
+						<div className = 'radio-toolbar' >
+							<input type="radio"  value = 'ft' name = 'working-time' id='ft'/>
+							<label htmlFor = 'ft' >Full-time</label>
+							<input type="radio" value = 'pt' name = 'working-time' id='pt'/>
+							<label htmlFor = 'pt'>Part-time</label>
 						</div>
 						<div>Địa điểm làm việc</div>
-						<div className = 'btn-group btn-group-xs'>
-							<button type="button" className="btn btn-light" value = 'home'>Chỉ có thể làm việc tại nhà</button>
-							<button type="button" className="btn btn-light" value = 'hcm'>Có thể làm việc tại Chi nhánh RTA HCM</button>
-							<button type='button' className='btn btn-light' value ='hn'>Có thể làm việc tại Chi nhánh RTA HAN</button>
+						<div className = 'radio-toolbar' >
+							<input type="radio"  value = 'home' name = 'working-place' id='home'/>
+							<label htmlFor = 'home' >Chỉ có thể làm việc tại nhà</label>
+							<input type="radio" value = 'rtahcm' name = 'working-place' id='rtahcm'/>
+							<label htmlFor = 'rtahcm'>Có thể làm việc tại Chi nhánh RTA HCM</label>
+							<input type='radio' value = 'rtahn' name = 'working-place' id = 'rtahn'/>
+							<label htmlFor ='rtahn'>Có thể làm việc tại Chi nhánh RTA HAN</label>
 						</div>
 						<div>Khả năng đi công tác xa?</div>
-						<div className = 'btn-group btn-group-xs'>
-							<button type="button" className="btn btn-light" value = 'y'>Có thể đi công tác xa</button>
-							<button type="button" className="btn btn-light" value = 'n'>Không thể đi công tác xa</button>
+						<div className = 'radio-toolbar' >
+							<input type="radio"  value = 'yes' name = 'field-trip' id='ft-yes'/>
+							<label htmlFor = 'ft-yes' >Có thể đi công tác xa</label>
+							<input type="radio" value = 'no' name = 'field-trip' id='ft-no'/>
+							<label htmlFor = 'ft-no'>Không thể đi công tác xa</label>
 						</div>
 						<div>Khả năng làm việc online</div>
-						<div className = 'btn-group btn-group-xs'>
-							<button type="button" className="btn btn-light" value = 'online'>Có thể làm việc online</button>
-							<button type="button" className="btn btn-light" value = 'offline'>Không thể làm việc online</button>
+						<div className = 'radio-toolbar' >
+							<input type="radio"  value = 'onl' name = 'working-online' id='onl'/>
+							<label htmlFor = 'onl' >Có thể làm việc online</label>
+							<input type="radio" value = 'off' name = 'working-online' id='off'/>
+							<label htmlFor = 'off'>Không thể làm việc online</label>
 						</div>
 						<div>Khả năng làm việc tại thực địa</div>
-						<div className = 'btn-group btn-group-xs'>
-							<button type="button" className="btn btn-light" value = 'yfield-work'>Có thể làm việc tại thực địa</button>
-							<button type="button" className="btn btn-light" value = 'nfield-work'>Không thể làm việc tại thực địa</button>
+						<div className = 'radio-toolbar' >
+							<input type="radio"  value = 'yes' name = 'field-work' id='fw-yes'/>
+							<label htmlFor = 'fw-yes' >Có thể làm việc tại thực địa</label>
+							<input type="radio" value = 'no' name = 'field-work' id='fw-no'/>
+							<label htmlFor = 'fw-no'>Không thể làm việc tại thực địa</label>
 						</div>
 						<div>Phương tiện di chuyển chủ yếu</div>
-						<div className = 'btn-group btn-group-xs'>
-							<button type="button" className="btn btn-light" value = 'bicycle'>Xe đạp</button>
-							<button type="button" className="btn btn-light" value = 'bike'>Xe máy</button>
-							<button type="button" className="btn btn-light" value = 'bus'>Xe buýt</button>
-							<button type="button" className="btn btn-light" value = 'grab'>Xe ôm</button>
-							<button type="button" className="btn btn-light" value = 'walk'>Đi bộ</button>
-							<button type="button" className="btn btn-light" value = 'no-transport'>Không có nhu cầu di chuyển</button>
+						<div className = 'radio-toolbar' >
+							<input type="radio"  value = 'bicycle' name = 'transportation' id='bicycle'/>
+							<label htmlFor = 'bicycle' >Xe đạp</label>
+							<input type="radio" value = 'bike' name = 'transportation' id='bike'/>
+							<label htmlFor = 'bike'>Xe máy</label>
+							<input type="radio"  value = 'bus' name = 'transportation' id='bus'/>
+							<label htmlFor = 'bus' >Xe buýt</label>
+							<input type="radio" value = 'grab' name = 'transportation' id='grab'/>
+							<label htmlFor = 'grab'>Xe ôm</label>
+							<input type="radio"  value = 'walk' name = 'transportation' id='walk'/>
+							<label htmlFor = 'walk' >Đi bộ</label>
+							<input type="radio" value = 'none' name = 'transportation' id='none'/>
+							<label htmlFor = 'none'>Không có nhu cầu di chuyển</label>
 						</div>
 						<div>Mức độ sử dụng thành thạo smartphone/tablet</div>
-						<div className = 'btn-group btn-group-xs'>
-							<button type="button" className="btn btn-light" value = 'no_fluency'>Không biết</button>
-							<button type="button" className="btn btn-light" value = 'normal_fluency'>Bình thường</button>
-							<button type="button" className="btn btn-light" value = 'high_fluency'>Rất thành thạo</button>
+						<div className = 'radio-toolbar' >
+							<input type="radio"  value = 'none' name = 'sp-fluency' id='spf-none'/>
+							<label htmlFor = 'spf-none' >Không biết</label>
+							<input type="radio" value = 'normal' name = 'sp-fluency' id='normal'/>
+							<label htmlFor = 'normal'>Bình thường</label>
+							<input type = 'radio' value ='very' name = 'sp-fluency' id='very'/>
+							<label htmlFor ='very'>Rất thành thạo</label>
 						</div>
 						<div>Smartphone/tablet sử dụng nhiều nhất</div>
-						<div className = 'btn-group btn-group-xs'>
-							<button type="button" className="btn btn-light" value = 'android'>Android</button>
-							<button type="button" className="btn btn-light" value = 'ios'>iOS</button>
-							<button type="button" className="btn btn-light" value = 'wp'>Windows Phone (WP)</button>
-							<button type="button" className="btn btn-light" value = 'no_os'>Chưa dùng</button>
+						<div className = 'radio-toolbar' >
+							<input type="radio"  value = 'android' name = 'sp-os' id='android'/>
+							<label htmlFor = 'android' >Android</label>
+							<input type="radio" value = 'iOS' name = 'sp-os' id='iOS'/>
+							<label htmlFor = 'iOS'>iOS</label>
+							<input type="radio"  value = 'wp' name = 'sp-os' id='wp'/>
+							<label htmlFor = 'wp' >Windows Phone (WP)</label>
+							<input type="radio" value = 'none' name = 'sp-os' id='spos-none'/>
+							<label htmlFor = 'spos-none'>Chưa dùng</label>
 						</div>
 						<DataCheckBox/>
 						<DataRadioBox/>
