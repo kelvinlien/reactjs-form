@@ -262,8 +262,8 @@ class Form extends React.Component{
 							<label htmlFor = 'grab'>Xe ôm</label>
 							<input type="radio"  value = 'walk' name = 'transportation' id='walk'/>
 							<label htmlFor = 'walk' >Đi bộ</label>
-							<input type="radio" value = 'none' name = 'transportation' id='none'/>
-							<label htmlFor = 'none'>Không có nhu cầu di chuyển</label>
+							<input type="radio" value = 'no-need' name = 'transportation' id='no-need'/>
+							<label htmlFor = 'no-need'>Không có nhu cầu di chuyển</label>
 						</div>
 						<div>Mức độ sử dụng thành thạo smartphone/tablet</div>
 						<div className = 'radio-toolbar' >

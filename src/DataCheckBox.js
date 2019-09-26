@@ -18,7 +18,7 @@ class DataCheckBox extends React.Component{
 	changeHandler(e){
 		let isChecked = e.target.checked;
 		let id = e.target.id;
-		if(id !== 'none')
+		if(id !== 'none-exp')
 		{
 			if(isChecked)
 			{
@@ -100,8 +100,8 @@ class DataCheckBox extends React.Component{
 				<label className = 'custom-control-label' htmlFor='analytic'>Đã từng phân tích dữ liệu sử dụng các công cụ phân tích (Excel/Stata/R/…)</label>
 			</div>
 			<div className = 'custom-control custom-checkbox'>
-				<input type = 'checkbox' className = 'custom-control-input' id='none' onChange={e => this.changeHandler(e)}/>
-				<label className = 'custom-control-label' htmlFor='none'>Chưa có kinh nghiệm nào.</label>
+				<input type = 'checkbox' className = 'custom-control-input' id='none-exp' onChange={e => this.changeHandler(e)}/>
+				<label className = 'custom-control-label' htmlFor='none-exp'>Chưa có kinh nghiệm nào.</label>
 			</div>
 			{this.state.experiences > 0 && this.state.none_checkstate === true &&
 				<div className="alert alert-danger" role="alert" >Lựa chọn có mâu thuẫn. Vui lòng chọn lại!</div>
