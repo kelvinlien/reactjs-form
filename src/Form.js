@@ -329,7 +329,7 @@ class Form extends React.Component{
 							<label htmlFor = 'spos-wp' >Windows Phone (WP)</label>
 							<input type="radio" value = 'none' name = 'sp-os' id='spos-none'/>
 							<label htmlFor = 'spos-none'>Chưa dùng</label>
-							<RadioInputGroup number = '2' values = {['Symbian', 'BOS']} ids = {['spos-sym', 'spos-bos']} innerHtmls = {['Symbian OS', 'BlackBerry OS']} onClick = {this.dummyFunction} inputClass ='' labelClass ='' name = 'sp-os' /> 
+							<RadioInputGroup number = '2' values = {['Symbian', 'BOS']} ids = {['spos-sym', 'spos-bos']} innerHtmls = {['Symbian OS', 'BlackBerry OS']} onClick = {this.dummyFunction} name = 'sp-os' /> 
 						</div>
 						<DataCheckBox/>
 						<DataRadioBox/>
