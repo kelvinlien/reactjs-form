@@ -18,7 +18,7 @@ class DataCheckBox extends React.Component{
 	changeHandler(e){
 		let isChecked = e.target.checked;
 		let id = e.target.id;
-		if(id !== 'none')
+		if(id !== 'none-exp')
 		{
 			if(isChecked)
 			{
@@ -31,7 +31,7 @@ class DataCheckBox extends React.Component{
 			{
 				if(this.state.experiences === 1)
 				{
-					this.setState(state => ({
+					this.setState(() => ({
 						experienced : false
 					}));
 				}
@@ -41,7 +41,7 @@ class DataCheckBox extends React.Component{
 			}
 			if(this.state.none_checkstate === true)
 			{
-				this.setState(state => ({
+				this.setState(() => ({
 					experienced : false
 				}));
 			}
@@ -50,7 +50,7 @@ class DataCheckBox extends React.Component{
 		{
 			if(isChecked)
 			{
-				this.setState(state => ({
+				this.setState(() => ({
 					experienced : false,
 					none_checkstate : true
 				}));
@@ -59,14 +59,14 @@ class DataCheckBox extends React.Component{
 			{
 				if(this.state.experiences === 0)
 				{
-					this.setState(state => ({
+					this.setState(() => ({
 						experienced : false,
 						none_checkstate : false
 					}));
 				}
 				else
 				{
-					this.setState(state =>({
+					this.setState(() =>({
 						experienced : true,
 						none_checkstate : false
 					}));
@@ -79,39 +79,39 @@ class DataCheckBox extends React.Component{
 		return(
 		<div id='DataCheckBox'>
 			<label htmlFor ='DataCheckBox'>Kinh nghiệm về dữ liệu</label>
-			<div>
-				<input type = 'checkbox' className = 'interviewer' id = 'interviewer' onChange={e => this.changeHandler(e)}/>
-				<label htmlFor = 'interviewer'>Đã từng làm điều tra viên/phỏng vấn viên.</label>
+			<div className = 'custom-control custom-checkbox'>
+				<input type = 'checkbox' className = 'custom-control-input' id = 'interviewer' onChange={e => this.changeHandler(e)}/>
+				<label className = 'custom-control-label' htmlFor = 'interviewer'>Đã từng làm điều tra viên/phỏng vấn viên.</label>
 			</div>
-			<div>
-				<input type = 'checkbox' className = 'supervisor' id='supervisor' onChange={e => this.changeHandler(e)}/>
-				<label htmlFor='supervisor'>Đã từng làm giám sát viên.</label>
+			<div className = 'custom-control custom-checkbox'>
+				<input type = 'checkbox' className = 'custom-control-input' id='supervisor' onChange={e => this.changeHandler(e)}/>
+				<label className = 'custom-control-label' htmlFor='supervisor'>Đã từng làm giám sát viên.</label>
 			</div>
-			<div>
-				<input type = 'checkbox' className = 'tester' id ='tester' onChange={e => this.changeHandler(e)}/>
-				<label htmlFor='tester'>Đã từng kiểm thử (test) bảng hỏi, góp ý/đề xuất điều chỉnh nội dung bảng hỏi giấy</label>
+			<div className = 'custom-control custom-checkbox'>
+				<input type = 'checkbox' className = 'custom-control-input' id ='tester' onChange={e => this.changeHandler(e)}/>
+				<label className = 'custom-control-label' htmlFor='tester'>Đã từng kiểm thử (test) bảng hỏi, góp ý/đề xuất điều chỉnh nội dung bảng hỏi giấy</label>
 			</div>
-			<div>
-				<input type = 'checkbox' className = 'statistic' id='statistic' onChange={e => this.changeHandler(e)}/>
-				<label htmlFor='statistic'>Đã từng nhập liệu sử dụng các phần mềm thống kê (Excel/SPSS/Stata/…)</label>
+			<div className = 'custom-control custom-checkbox'>
+				<input type = 'checkbox' className = 'custom-control-input' id='statistic' onChange={e => this.changeHandler(e)}/>
+				<label className = 'custom-control-label' htmlFor='statistic'>Đã từng nhập liệu sử dụng các phần mềm thống kê (Excel/SPSS/Stata/…)</label>
 			</div>
-			<div>
-				<input type = 'checkbox' className = 'analytic' id='analytic' onChange={e => this.changeHandler(e)}/>
-				<label htmlFor='analytic'>Đã từng phân tích dữ liệu sử dụng các công cụ phân tích (Excel/Stata/R/…)</label>
+			<div className = 'custom-control custom-checkbox'>
+				<input type = 'checkbox' className = 'custom-control-input' id='analytic' onChange={e => this.changeHandler(e)}/>
+				<label className = 'custom-control-label' htmlFor='analytic'>Đã từng phân tích dữ liệu sử dụng các công cụ phân tích (Excel/Stata/R/…)</label>
 			</div>
-			<div>
-				<input type = 'checkbox' className = 'none' id='none' onChange={e => this.changeHandler(e)}/>
-				<label htmlFor='none'>Chưa có kinh nghiệm nào.</label>
+			<div className = 'custom-control custom-checkbox'>
+				<input type = 'checkbox' className = 'custom-control-input' id='none-exp' onChange={e => this.changeHandler(e)}/>
+				<label className = 'custom-control-label' htmlFor='none-exp'>Chưa có kinh nghiệm nào.</label>
 			</div>
 			{this.state.experiences > 0 && this.state.none_checkstate === true &&
-				<div className = 'choose-again'>Lựa chọn có mâu thuẫn. Vui lòng chọn lại!</div>
+				<div className="alert alert-danger" role="alert" >Lựa chọn có mâu thuẫn. Vui lòng chọn lại!</div>
 			}
 			{this.state.experienced === true  &&
 				<label className = 'more-info' htmlFor ='more-info'>Mô tả thêm về kinh nghiệm, kỹ năng liên quan đến dữ liệu.</label>
 			}
 			{this.state.experienced === true &&
 			<div>
-				<textarea className = 'more-info' rows = '4' cols = '60' id = 'more-info' />
+				<textarea className = 'form-control' rows = '4' cols = '60' id = 'more-info' />
 			</div>
 			}
 

@@ -4,6 +4,7 @@ import './index.css';
 //import App from './App';
 import Form from './Form';
 import * as serviceWorker from './serviceWorker';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 ReactDOM.render(<Form />, document.getElementById('form'));
 
