@@ -17,11 +17,12 @@ class DataRadioBox extends React.Component{
 		console.log('tele_checkstate: '+this.state.tele_checkstate);
 	}
 	clickHandler(e){
-		this.setState(state =>({
-			checked : true
-		}));
+		let name = e.target.name;
 		let id = e.target.id;
-		//console.log('id: '+id);
+		this.setState(state =>({
+			checked : true,
+			[name] : id
+		}));
 		if(id === 'customerSp' || id === 'technicalSp')
 		{
 			this.setState(() =>({
@@ -46,6 +47,7 @@ class DataRadioBox extends React.Component{
 	}
 	render(){
 		//this.debugger();
+		// console.log(this.state);
 		return(
 		<div id='DataRadioBox'>
 			<label htmlFor='DataRadioBox'>Vị trí ứng tuyển</label>

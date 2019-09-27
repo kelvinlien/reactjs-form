@@ -7,8 +7,17 @@ class RadioInput extends React.Component{
 	render()
 	{
 		return(
-			<input type = 'radio' value = {props.value} name = {props.name} id = {props.id} onClick = {props.onClick} className = {props.inputClass}/>
-			<label htmlFor = {props.name} className = {props.labelClass}>{props.innerHtml}</label>
+			<>
+			<input type = 'radio' 
+			value = {this.props.value} 
+			name = {this.props.name} 
+			id = {this.props.id} 
+			onClick = {this.props.onClick} 
+			className = {this.props.inputClass}/>
+			<label htmlFor = {this.props.id} 
+			className = {this.props.labelClass}>{this.props.innerHtml}</label>
+			</>
 			);
 	}
 }
+export default RadioInput;

@@ -4,7 +4,8 @@ import DataRadioBox from './DataRadioBox';
 import SubmitButton from './SubmitButton';
 import Select from 'react-select';
 import './Form.css';
-//import RadioInput from './RadioInput.js';
+import RadioInputGroup from './RadioInputGroup.js';
+import RadioInput from './RadioInput.js';
 class Form extends React.Component{
 	constructor(props){
 		super(props);
@@ -328,7 +329,7 @@ class Form extends React.Component{
 							<label htmlFor = 'spos-wp' >Windows Phone (WP)</label>
 							<input type="radio" value = 'none' name = 'sp-os' id='spos-none'/>
 							<label htmlFor = 'spos-none'>Chưa dùng</label>
-							
+							<RadioInputGroup number = '2' values = {['Symbian', 'BOS']} ids = {['spos-sym', 'spos-bos']} innerHtmls = {['Symbian OS', 'BlackBerry OS']} onClick = {this.dummyFunction} inputClass ='' labelClass ='' name = 'sp-os' /> 
 						</div>
 						<DataCheckBox/>
 						<DataRadioBox/>
@@ -339,3 +340,4 @@ class Form extends React.Component{
  	}
 }
 export default Form;
+//Input: a number of how many Radio Input should be created, an array of values, an array of ids, an array of innerHtmls, an onClick, a inputClass, a labelClass, a name
