@@ -49,7 +49,7 @@ class DataRadioBox extends React.Component{
 		return(
 		<div id='DataRadioBox'>
 			<label htmlFor='DataRadioBox'>Vị trí ứng tuyển</label>
-			<div className = "custom-control custom-radio">
+			<div className = "custom-control custom-radio" name = 'position'>
   				<input type="radio" id="internrtlab" name='position' className = 'custom-control-input' onClick={e => this.clickHandler(e)}/ >
   				<label className = 'custom-control-label' htmlFor="internrtlab">Thực tập sinh rtLab</label>
 			</div>

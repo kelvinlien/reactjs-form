@@ -4,6 +4,7 @@ import DataRadioBox from './DataRadioBox';
 import SubmitButton from './SubmitButton';
 import Select from 'react-select';
 import './Form.css';
+//import RadioInput from './RadioInput.js';
 class Form extends React.Component{
 	constructor(props){
 		super(props);
@@ -19,6 +20,7 @@ class Form extends React.Component{
 				city : '',
 				district : '',
 				ward : '',
+				road : '',
 				major : '',
 				college : ''
 			},
@@ -57,6 +59,7 @@ class Form extends React.Component{
 			this.loadSelectOptions = this.loadSelectOptions.bind(this);
 			this.checkAddressFormat = this.checkAddressFormat.bind(this);
 			this.saveToState = this.saveToState.bind(this);
+			this.dummyFunction = this.dummyFunction.bind(this);
 			}
  	getMaxDateFormat(){
 		let dt = this.state.maxDate;
@@ -71,6 +74,10 @@ class Form extends React.Component{
     	} 
   			let format = yyyy + '-' + mm + '-' + dd
 			return format;
+ 	}
+ 	dummyFunction()
+ 	{
+ 		//doing nothing
  	}
  	loadSelectOptions(a, b){//load the select options according to the prior choice in the address hierarchy. Input a is an object or array of addresses to load into select options, b is the position of that selection in the address hierarchy.
  		let options = [];
@@ -153,9 +160,12 @@ class Form extends React.Component{
  	saveToState(e){ //get the value onChange and setState accordingly. --not yet work
  		let name = e.target.name;
  		let val = e.target.value;
+ 		//let obj = JSON.parse('{ $name:"$val", "age":30, "city":"New York"}');
+ 		//console.log(obj);
  		this.setState(prevState=>({
  			newUser : {
- 				...prevState.newUser
+ 				...prevState.newUser,
+ 				[name] : val
  			}
  		}));
  	}
@@ -225,11 +235,11 @@ class Form extends React.Component{
 							</div>
 							<div className = 'col'>
 								<div className = 'text-center'>Số nhà - Đường</div>
-								<input type = 'text' className = 'form-control' />
+								<input type = 'text' className = 'form-control' name ='road' onChange = {e => this.saveToState(e)} />
 							</div>
 						</div>
 						<div>
-							<textarea placeholder="Ghi chú thêm chỉ dẫn về địa chỉ" cols = '50' rows = '3' className = 'form-control'/>
+							<textarea placeholder="Ghi chú thêm chỉ dẫn về địa chỉ" cols = '50' rows = '3' className = 'form-control' name = 'address-more-info' onChange = {e => this.saveToState(e)}/>
 						</div>
 						<div className = 'text-center'>Học vấn</div>
 						<div className = 'row'>
@@ -241,21 +251,21 @@ class Form extends React.Component{
 							</div>
 						</div>
 						<div>Kinh nghiệm </div>
-						<div className = 'radio-toolbar' >
+						<div className = 'radio-toolbar' name = 'graduate' onChange = {e => this.saveToState(e)}>
 							<input type="radio"  value = 'datn' name = 'graduate' id='graduated'/>
 							<label htmlFor = 'graduated' >Đã tốt nghiệp</label>
 							<input type="radio" value = 'tn' name = 'graduate' id='under-grad'/>
 							<label htmlFor = 'under-grad'>Chưa tốt nghiệp</label>
 						</div>
 						<div>Thời gian làm việc</div>
-						<div className = 'radio-toolbar' >
+						<div className = 'radio-toolbar' name = 'working-time' onChange = {e => this.saveToState(e)} >
 							<input type="radio"  value = 'ft' name = 'working-time' id='ft'/>
 							<label htmlFor = 'ft' >Full-time</label>
 							<input type="radio" value = 'pt' name = 'working-time' id='pt'/>
 							<label htmlFor = 'pt'>Part-time</label>
 						</div>
 						<div>Địa điểm làm việc</div>
-						<div className = 'radio-toolbar' >
+						<div className = 'radio-toolbar' name = 'working-place' onChange = {e => this.saveToState(e)}>
 							<input type="radio"  value = 'home' name = 'working-place' id='home'/>
 							<label htmlFor = 'home' >Chỉ có thể làm việc tại nhà</label>
 							<input type="radio" value = 'rtahcm' name = 'working-place' id='rtahcm'/>
@@ -264,28 +274,28 @@ class Form extends React.Component{
 							<label htmlFor ='rtahn'>Có thể làm việc tại Chi nhánh RTA HAN</label>
 						</div>
 						<div>Khả năng đi công tác xa?</div>
-						<div className = 'radio-toolbar' >
+						<div className = 'radio-toolbar' name = 'field-trip' onChange = {e => this.saveToState(e)}>
 							<input type="radio"  value = 'yes' name = 'field-trip' id='ft-yes'/>
 							<label htmlFor = 'ft-yes' >Có thể đi công tác xa</label>
 							<input type="radio" value = 'no' name = 'field-trip' id='ft-no'/>
 							<label htmlFor = 'ft-no'>Không thể đi công tác xa</label>
 						</div>
 						<div>Khả năng làm việc online</div>
-						<div className = 'radio-toolbar' >
+						<div className = 'radio-toolbar' name = 'working-online' onChange = {e => this.saveToState(e)}>
 							<input type="radio"  value = 'onl' name = 'working-online' id='onl'/>
 							<label htmlFor = 'onl' >Có thể làm việc online</label>
 							<input type="radio" value = 'off' name = 'working-online' id='off'/>
 							<label htmlFor = 'off'>Không thể làm việc online</label>
 						</div>
 						<div>Khả năng làm việc tại thực địa</div>
-						<div className = 'radio-toolbar' >
+						<div className = 'radio-toolbar' name = 'field-work' onChange = {e => this.saveToState(e)}>
 							<input type="radio"  value = 'yes' name = 'field-work' id='fw-yes'/>
 							<label htmlFor = 'fw-yes' >Có thể làm việc tại thực địa</label>
 							<input type="radio" value = 'no' name = 'field-work' id='fw-no'/>
 							<label htmlFor = 'fw-no'>Không thể làm việc tại thực địa</label>
 						</div>
 						<div>Phương tiện di chuyển chủ yếu</div>
-						<div className = 'radio-toolbar' >
+						<div className = 'radio-toolbar' name = 'transportation' onChange = {e => this.saveToState(e)}>
 							<input type="radio"  value = 'bicycle' name = 'transportation' id='bicycle'/>
 							<label htmlFor = 'bicycle' >Xe đạp</label>
 							<input type="radio" value = 'bike' name = 'transportation' id='bike'/>
@@ -300,7 +310,7 @@ class Form extends React.Component{
 							<label htmlFor = 'no-need'>Không có nhu cầu di chuyển</label>
 						</div>
 						<div>Mức độ sử dụng thành thạo smartphone/tablet</div>
-						<div className = 'radio-toolbar' >
+						<div className = 'radio-toolbar' name = 'sp-fluency' onChange = {e => this.saveToState(e)}>
 							<input type="radio"  value = 'none' name = 'sp-fluency' id='spf-none'/>
 							<label htmlFor = 'spf-none' >Không biết</label>
 							<input type="radio" value = 'normal' name = 'sp-fluency' id='normal'/>
@@ -309,7 +319,7 @@ class Form extends React.Component{
 							<label htmlFor ='very'>Rất thành thạo</label>
 						</div>
 						<div>Smartphone/tablet sử dụng nhiều nhất</div>
-						<div className = 'radio-toolbar' >
+						<div className = 'radio-toolbar' name = 'sp-os' onChange = {e => this.saveToState(e)}>
 							<input type="radio"  value = 'android' name = 'sp-os' id='spos-android'/>
 							<label htmlFor = 'spos-android' >Android</label>
 							<input type="radio" value = 'iOS' name = 'sp-os' id='spos-iOS'/>
@@ -318,6 +328,7 @@ class Form extends React.Component{
 							<label htmlFor = 'spos-wp' >Windows Phone (WP)</label>
 							<input type="radio" value = 'none' name = 'sp-os' id='spos-none'/>
 							<label htmlFor = 'spos-none'>Chưa dùng</label>
+							
 						</div>
 						<DataCheckBox/>
 						<DataRadioBox/>
