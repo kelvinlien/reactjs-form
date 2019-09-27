@@ -1,5 +1,7 @@
 import React from 'react';
-class RadioInput extends React.Component{
+class RadioInput extends React.Component
+//Usage: for every radio in the form
+{
 	constructor(props)
 	{
 		super(props);
