@@ -1,5 +1,4 @@
 import React from 'react';
-import './SubmitButton.css';
 class SubmitButton extends React.Component{
 	constructor(props)
 	{
