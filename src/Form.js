@@ -76,7 +76,6 @@ class Form extends React.Component{
  		let options = [];
  		if (Array.isArray(a))
  		{
- 			console.log('wards incoming');
  			a.forEach( function(element, index) {
  				let obj = {value : element, label : element, id : b};
  				options.push(obj);
@@ -311,19 +310,19 @@ class Form extends React.Component{
 						</div>
 						<div>Smartphone/tablet sử dụng nhiều nhất</div>
 						<div className = 'radio-toolbar' >
-							<input type="radio"  value = 'android' name = 'sp-os' id='android'/>
-							<label htmlFor = 'android' >Android</label>
-							<input type="radio" value = 'iOS' name = 'sp-os' id='iOS'/>
-							<label htmlFor = 'iOS'>iOS</label>
-							<input type="radio"  value = 'wp' name = 'sp-os' id='wp'/>
-							<label htmlFor = 'wp' >Windows Phone (WP)</label>
+							<input type="radio"  value = 'android' name = 'sp-os' id='spos-android'/>
+							<label htmlFor = 'spos-android' >Android</label>
+							<input type="radio" value = 'iOS' name = 'sp-os' id='spos-iOS'/>
+							<label htmlFor = 'spos-iOS'>iOS</label>
+							<input type="radio"  value = 'wp' name = 'sp-os' id='spos-wp'/>
+							<label htmlFor = 'spos-wp' >Windows Phone (WP)</label>
 							<input type="radio" value = 'none' name = 'sp-os' id='spos-none'/>
 							<label htmlFor = 'spos-none'>Chưa dùng</label>
 						</div>
 						<DataCheckBox/>
 						<DataRadioBox/>
-						<SubmitButton/>
 					</div>
+					<SubmitButton/>
 				</form>
 				);
  	}

@@ -1,4 +1,5 @@
 import React from 'react';
+import './SubmitButton.css';
 class SubmitButton extends React.Component{
 	constructor(props)
 	{
@@ -10,7 +11,9 @@ class SubmitButton extends React.Component{
 	}
 	render(){
 		return(
-		<input type ='submit' id='submit' className = "btn btn-success" onClick = {e => this.submitHandler(e)} value = 'HOÀN THÀNH & GỬI'/>
+		<div className = 'jumbotron text-center'>
+			<input type ='submit' id='submit' className = "btn btn-success" onClick = {e => this.submitHandler(e)} value = 'HOÀN THÀNH & GỬI'/>
+		</div>
 		)
 	}
 }
