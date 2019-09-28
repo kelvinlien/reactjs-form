@@ -6,6 +6,7 @@ import Select from 'react-select';
 import './Form.css';
 import RadioInputGroup from './RadioInputGroup.js';
 import RadioInput from './RadioInput.js';
+import WorkingAbility from './WorkingAbility.js';
 class Form extends React.Component{
 	constructor(props){
 		super(props);
@@ -246,35 +247,7 @@ class Form extends React.Component{
 								{this.loadSelectOptions(this.state.colleges, 'college')}
 							</div>
 						</div>
-						<div>Kinh nghiệm </div>
-						<div className = 'radio-toolbar' name = 'graduate' onChange = {e => this.saveToState(e)}>
-							<input type="radio"  value = 'datn' name = 'graduate' id='graduated'/>
-							<label htmlFor = 'graduated' >Đã tốt nghiệp</label>
-							<input type="radio" value = 'tn' name = 'graduate' id='under-grad'/>
-							<label htmlFor = 'under-grad'>Chưa tốt nghiệp</label>
-						</div>
-						<div>Thời gian làm việc</div>
-						<div className = 'radio-toolbar' name = 'working-time' onChange = {e => this.saveToState(e)} >
-							<input type="radio"  value = 'ft' name = 'working-time' id='ft'/>
-							<label htmlFor = 'ft' >Full-time</label>
-							<input type="radio" value = 'pt' name = 'working-time' id='pt'/>
-							<label htmlFor = 'pt'>Part-time</label>
-						</div>
-						<div>Địa điểm làm việc</div>
-						<div className = 'radio-toolbar' name = 'working-place' onChange = {e => this.saveToState(e)}>
-							<input type="radio"  value = 'home' name = 'working-place' id='home'/>
-							<label htmlFor = 'home' >Chỉ có thể làm việc tại nhà</label>
-							<input type="radio" value = 'rtahcm' name = 'working-place' id='rtahcm'/>
-							<label htmlFor = 'rtahcm'>Có thể làm việc tại Chi nhánh RTA HCM</label>
-							<input type='radio' value = 'rtahn' name = 'working-place' id = 'rtahn'/>
-							<label htmlFor ='rtahn'>Có thể làm việc tại Chi nhánh RTA HAN</label>
-						</div>
-						<RadioInputGroup values = {['yes', 'no']} ids = {['ft-yes', 'ft-no']} innerHtmls = {['Có thể đi công tác xa', 'Không thể đi công tác xa']} onChange = {e => this.saveToState(e)} name = 'field-trip' content = 'Khả năng đi công tác xa' /> 
-						<RadioInputGroup values = {['onl', 'off']} ids = {['onl', 'off']} innerHtmls = {['Có thể làm việc online', 'Không thể làm việc online']} onChange = {e => this.saveToState(e)} name = 'working-online' content = 'Khả năng làm việc online' /> 
-						<RadioInputGroup values = {['fw-yes', 'fw-no']} ids = {['fw-yes', 'fw-no']} innerHtmls = {['Có thể làm việc tại thực địa', 'Không thể làm việc tại thực địa']} onChange = {e => this.saveToState(e)} name = 'field-work' content = 'Khả năng làm việc tại thực địa' /> 
-						<RadioInputGroup values = {['bicycle', 'bike', 'bus', 'grab', 'walk', 'no-need']} ids = {['bicycle', 'bike', 'bus', 'grab', 'walk', 'no-need']} innerHtmls = {['Xe đạp', 'xe máy', 'Xe buýt', 'Xe ôm', 'Đi bộ', 'Không có nhu cầu di chuyển']} onChange = {e => this.saveToState(e)} name = 'transportation' content = 'Phương tiện di chuyển chủ yếu' /> 
-						<RadioInputGroup values = {['none', 'normal', 'very']} ids = {['spf-none', 'normal', 'very']} innerHtmls = {['Không biết', 'Bình thường', 'Rất thành thạo']} onChange = {e => this.saveToState(e)} name = 'sp-os' content = 'Mức độ sử dụng thành thạo smartphone/tablet' /> 
-						<RadioInputGroup values = {['android', 'iOS', 'wp', 'none']} ids = {['spos-android', 'spos-iOS', 'spos-wp', 'spos-none']} innerHtmls = {['Android', 'iOS', 'Windows Phone (WP)', 'Chưa dùng']} onChange = {e => this.saveToState(e)} name = 'sp-fluency' content = 'Smartphone/tablet sử dụng nhiều nhất' /> 
+						<WorkingAbility onChange = {e => this.saveToState(e)}/>
 						<DataCheckBox/>
 						<DataRadioBox/>
 					</div>
