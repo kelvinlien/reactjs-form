@@ -23,7 +23,10 @@ class RadioInputGroup extends React.Component
 		}
 		return(
 			<>
+			{
+				this.props.content !== '' &&
 				<div>{this.props.content}</div>
+			}
 				<div className = 'radio-toolbar' name = {this.props.name} onChange = {this.props.onChange}>
 					{returned}
 				</div>

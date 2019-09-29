@@ -7,6 +7,8 @@ import './Form.css';
 import RadioInputGroup from './RadioInputGroup.js';
 import RadioInput from './RadioInput.js';
 import WorkingAbility from './WorkingAbility.js';
+import ContactAndID from './ContactAndID.js';
+import FormControlInput from './FormControlInput.js';
 class Form extends React.Component{
 	constructor(props){
 		super(props);
@@ -154,11 +156,9 @@ class Form extends React.Component{
  			console.log('something went wrong');
  		}
  	}
- 	saveToState(e){ //get the value onChange and setState accordingly. --not yet work
+ 	saveToState(e){ //get the value onChange and setState accordingly.
  		let name = e.target.name;
  		let val = e.target.value;
- 		//let obj = JSON.parse('{ $name:"$val", "age":30, "city":"New York"}');
- 		//console.log(obj);
  		this.setState(prevState=>({
  			newUser : {
  				...prevState.newUser,
@@ -191,12 +191,7 @@ class Form extends React.Component{
 						</div>
 						<div className = 'row'>
 							<div className = 'col'>
-								<div className = 'radio-toolbar' name = 'gender' onChange = {e => this.saveToState(e)}>
-									<input type="radio"  value = 'nam' name = 'gender' id='genderMale'/>
-									<label htmlFor = 'genderMale' >Nam</label>
-									<input type="radio" value = 'nu' name = 'gender' id='genderFemale'/>
-									<label htmlFor = 'genderFemale'>Nữ</label>
-								</div>
+								<RadioInputGroup values = {['male', 'female']} name = 'gender' ids = {['male', 'female']} innerHtmls = {['Nam', 'Nữ']} onChange = {e => this.saveToState(e)}/>
 							</div>
 							<div className = 'col'>
 								<label>
@@ -205,15 +200,7 @@ class Form extends React.Component{
 								<input type = 'date' className='form-control' max = {this.getMaxDateFormat()} name = 'dob' onChange = {e => this.saveToState(e)}/>
 							</div>
 						</div>
-						<div>Email</div>
-						<input type = 'email' className = 'form-control' name = 'email' onChange = {e => this.saveToState(e)} />
-						<small id="emailHelp" className="form-text text-muted">RTA sẽ gửi 1 email thông tin tài khoản ứng viên đến địa chỉ email bạn đã cung cấp ở đây. Vì vậy, bạn vui lòng sử dụng email thật khi đăng ký.</small>
-						<div>Điện thoại</div>
-						<input type = 'tel' className = 'form-control' name = 'phone' onChange = {e => this.saveToState(e)}/>
-						<small id="emailHelp" className="form-text text-muted">Vui lòng cung cấp SĐT thật vì bộ phận Tuyển dụng RTA sẽ liên hệ PV qua SĐT này.</small>
-						<div>CMND/CCCD/Hộ chiếu</div>
-						<input type = 'number' className = 'form-control' name = 'userID' onChange = {e => this.saveToState(e)}/>
-						<small id="emailHelp" className="form-text text-muted">Thông tin này sẽ được dùng làm tên đăng nhập (username) tài khoản ứng viên RTA.</small>
+						<ContactAndID onChange = {e => this.saveToState(e)}/>
 						<div className = 'text-center'>Địa chỉ liên hệ</div>
 						<div className = 'row'>
 							<div className = 'col'>
