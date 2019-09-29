@@ -1,4 +1,5 @@
 import React from 'react';
+import CustomRadioGroup from './CustomRadioGroup.js';
 class DataRadioBox extends React.Component{
 	constructor(props){
 		super(props);
@@ -6,7 +7,12 @@ class DataRadioBox extends React.Component{
 		{
 		checked : false,
 		sp_checkstate : false,
-		tele_checkstate : false
+		tele_checkstate : false,
+		dataSet : {
+			ids : ['internrtlab', 'internrtst', 'webdev', 'android', 'telephonist', 'customerSp', 'technicalSp'],
+			name : 'position',
+			innerHtmls : ['Thực tập sinh rtLab', 'Thực tập sinh rtSolution', 'Web developer', 'Android developer', 'Điện thoại viên', 'Hỗ trợ khách hàng', 'Hỗ trợ kỹ thuật']
+		}
 		}
 		this.clickHandler = this.clickHandler.bind(this);
 	}
@@ -51,36 +57,7 @@ class DataRadioBox extends React.Component{
 		return(
 		<div id='DataRadioBox'>
 			<label htmlFor='DataRadioBox'>Vị trí ứng tuyển</label>
-			<div className = "custom-control custom-radio" name = 'position'>
-  				<input type="radio" id="internrtlab" name='position' className = 'custom-control-input' onClick={e => this.clickHandler(e)}/ >
-  				<label className = 'custom-control-label' htmlFor="internrtlab">Thực tập sinh rtLab</label>
-			</div>
-
-			<div className = "custom-control custom-radio">
-  				<input type="radio" id="internrtst" name='position' className = 'custom-control-input' onClick={e => this.clickHandler(e)}/>
-  				<label className = 'custom-control-label' htmlFor="internrtst">Thực tập sinh rtST</label>
-			</div>
-
-			<div className = "custom-control custom-radio">
-  				<input type="radio" id="webdev" name = 'position' className = 'custom-control-input' onClick={e => this.clickHandler(e)}/>
-  				<label className = 'custom-control-label' htmlFor="webdev">Web developer</label>
-			</div>
-			<div className = "custom-control custom-radio">
-				<input type = 'radio' id='android' name = 'position' className = 'custom-control-input' onClick={e => this.clickHandler(e)}/>
-				<label className = 'custom-control-label' htmlFor='android'>Android developer</label>
-			</div>
-			<div className = "custom-control custom-radio">
-				<input type = 'radio' id='telephonist' name = 'position' className = 'custom-control-input' onClick={e => this.clickHandler(e)}/>
-				<label className = 'custom-control-label' htmlFor='telephonist'>Điện thoại viên</label>
-			</div>
-			<div className = "custom-control custom-radio">
-				<input type = 'radio' id='customerSp' name = 'position' className = 'custom-control-input' onClick={e => this.clickHandler(e)}/>
-				<label className = 'custom-control-label' htmlFor='customerSp'>Hỗ trợ khác hàng</label>
-			</div>
-			<div className = "custom-control custom-radio">
-				<input type = 'radio' id='technicalSp' name = 'position' className = 'custom-control-input' onClick={e => this.clickHandler(e)}/>
-				<label className = 'custom-control-label' htmlFor='technicalSp'>Hỗ trợ kỹ thuật</label>
-			</div>
+			<CustomRadioGroup ids = {this.state.dataSet.ids} name = {this.state.dataSet.name} onClick={e => this.clickHandler(e)} innerHtmls = {this.state.dataSet.innerHtmls} />
 			<label htmlFor = 'project-select'>Dự án muốn tham gia</label>
 			{this.state.checked === true && this.state.tele_checkstate === false &&
 			<div id = 'project-select' className = "custom-control custom-radio">
