@@ -21,7 +21,7 @@ class ContactANDID extends React.Component
 		let i;
 		for ( i = 0 ; i < this.state.dataSet.types.length; i++)
 		{
-			returned.push(<FormControlInput content = {this.state.dataSet.contents[i]} type = {this.state.dataSet.types[i]} name = {this.state.dataSet.names[i]} onChange = {this.props.onChange} id = {this.state.dataSet.ids[i]} innerHtml = {this.state.dataSet.innerHtmls[i]}/>)
+			returned.push(<FormControlInput content = {this.state.dataSet.contents[i]} type = {this.state.dataSet.types[i]} name = {this.state.dataSet.names[i]} onChange = {this.props.onChange} id = {this.state.dataSet.ids[i]} innerHtml = {this.state.dataSet.innerHtmls[i]} key = {this.state.dataSet.ids[i]}/>)
 		}
 		return(
 			<>

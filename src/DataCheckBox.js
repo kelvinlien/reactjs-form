@@ -1,13 +1,18 @@
 import React from 'react';
-import './DataCheckBox.css';
+import CustomCheckboxGroup from './CustomCheckboxGroup.js';
 class DataCheckBox extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
 			experienced : false,
 			experiences : 0,
-			none_checkstate : false
+			none_checkstate : false,
+			dataSet : {
+				ids : ['interviewer', 'supervisor', 'tester', 'statistic', 'analytic', 'none-exp'],
+				name : 'data_experience',
+				innerHtmls : ['Đã từng làm điều tra viên/phỏng vấn viên', 'Đã từng làm giám sát viên', 'Đã từng kiểm thử (test) bảng hỏi, góp ý/đề xuất điều chỉnh nội dung bảng hỏi giấy', 'Đã từng nhập liệu sử dụng các phần mềm thống kê (Excel/SPSS/Stata/…)', 'Đã từng phân tích dữ liệu sử dụng các công cụ phân tích (Excel/Stata/R/…)', 'Chưa có kinh nghiệm nào']
 		}
+	}
 		this.changeHandler = this.changeHandler.bind(this);
 	}
 	debugger()
@@ -79,30 +84,8 @@ class DataCheckBox extends React.Component{
 		return(
 		<div id='DataCheckBox'>
 			<label htmlFor ='DataCheckBox'>Kinh nghiệm về dữ liệu</label>
-			<div className = 'custom-control custom-checkbox'>
-				<input type = 'checkbox' className = 'custom-control-input' id = 'interviewer' onChange={e => this.changeHandler(e)}/>
-				<label className = 'custom-control-label' htmlFor = 'interviewer'>Đã từng làm điều tra viên/phỏng vấn viên.</label>
-			</div>
-			<div className = 'custom-control custom-checkbox'>
-				<input type = 'checkbox' className = 'custom-control-input' id='supervisor' onChange={e => this.changeHandler(e)}/>
-				<label className = 'custom-control-label' htmlFor='supervisor'>Đã từng làm giám sát viên.</label>
-			</div>
-			<div className = 'custom-control custom-checkbox'>
-				<input type = 'checkbox' className = 'custom-control-input' id ='tester' onChange={e => this.changeHandler(e)}/>
-				<label className = 'custom-control-label' htmlFor='tester'>Đã từng kiểm thử (test) bảng hỏi, góp ý/đề xuất điều chỉnh nội dung bảng hỏi giấy</label>
-			</div>
-			<div className = 'custom-control custom-checkbox'>
-				<input type = 'checkbox' className = 'custom-control-input' id='statistic' onChange={e => this.changeHandler(e)}/>
-				<label className = 'custom-control-label' htmlFor='statistic'>Đã từng nhập liệu sử dụng các phần mềm thống kê (Excel/SPSS/Stata/…)</label>
-			</div>
-			<div className = 'custom-control custom-checkbox'>
-				<input type = 'checkbox' className = 'custom-control-input' id='analytic' onChange={e => this.changeHandler(e)}/>
-				<label className = 'custom-control-label' htmlFor='analytic'>Đã từng phân tích dữ liệu sử dụng các công cụ phân tích (Excel/Stata/R/…)</label>
-			</div>
-			<div className = 'custom-control custom-checkbox'>
-				<input type = 'checkbox' className = 'custom-control-input' id='none-exp' onChange={e => this.changeHandler(e)}/>
-				<label className = 'custom-control-label' htmlFor='none-exp'>Chưa có kinh nghiệm nào.</label>
-			</div>
+			<CustomCheckboxGroup ids = {this.state.dataSet.ids} name = {this.state.dataSet.name} onClick= {e => this.changeHandler(e)} innerHtmls = {this.state.dataSet.innerHtmls} />
+
 			{this.state.experiences > 0 && this.state.none_checkstate === true &&
 				<div className="alert alert-danger" role="alert" >Lựa chọn có mâu thuẫn. Vui lòng chọn lại!</div>
 			}

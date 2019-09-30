@@ -57,7 +57,7 @@ class DataRadioBox extends React.Component{
 		return(
 		<div id='DataRadioBox'>
 			<label htmlFor='DataRadioBox'>Vị trí ứng tuyển</label>
-			<CustomRadioGroup ids = {this.state.dataSet.ids} name = {this.state.dataSet.name} onClick={e => this.clickHandler(e)} innerHtmls = {this.state.dataSet.innerHtmls} />
+			<CustomRadioGroup ids = {this.state.dataSet.ids} name = {this.state.dataSet.name} onClick={e => this.clickHandler(e)} innerHtmls = {this.state.dataSet.innerHtmls}/>
 			<label htmlFor = 'project-select'>Dự án muốn tham gia</label>
 			{this.state.checked === true && this.state.tele_checkstate === false &&
 			<div id = 'project-select' className = "custom-control custom-radio">

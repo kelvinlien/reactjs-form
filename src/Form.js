@@ -26,7 +26,8 @@ class Form extends React.Component{
 				ward : '',
 				road : '',
 				major : '',
-				college : ''
+				college : '',
+				data_experience : []
 			},
 			setAddress : 0,
 			address : {
@@ -100,9 +101,9 @@ class Form extends React.Component{
  	checkAddressFormat(selectedOption){//onChange function, setState and assign address value for newUser.
  		let val = selectedOption.value;
  		let b = selectedOption.id;
- 		if (b == 'city' || b == 'district' || b =='ward')
+ 		if (b === 'city' || b === 'district' || b ==='ward')
  		{
- 			if(b == 'city' && ((this.state.newUser.district === '' && this.state.setAddress === 0) || (this.state.setAddress >0)))
+ 			if(b === 'city' && ((this.state.newUser.district === '' && this.state.setAddress === 0) || (this.state.setAddress >0)))
  			{
  				this.setState(prevState =>({
  					newUser : {
@@ -114,7 +115,7 @@ class Form extends React.Component{
  					setAddress : prevState.setAddress + 1
  				}));
  			}
- 			else if(b == 'district' && ((this.state.newUser.ward === '' && this.state.setAddress === 0)|| (this.state.setAddress > 0)))
+ 			else if(b === 'district' && ((this.state.newUser.ward === '' && this.state.setAddress === 0)|| (this.state.setAddress > 0)))
  			{
  				this.setState(prevState =>({
  					newUser : {
@@ -124,7 +125,7 @@ class Form extends React.Component{
  					}
  				}));
  			}
- 			else if(b== 'ward' && this.state.newUser.ward !== val)
+ 			else if(b=== 'ward' && this.state.newUser.ward !== val)
  			{
  				this.setState(prevState => ({
  					newUser : {
@@ -134,9 +135,9 @@ class Form extends React.Component{
  				}));
  			}
  		}
- 		else if ( b == 'college' || b == 'major')
+ 		else if ( b === 'college' || b === 'major')
  		{
- 			((b == 'college')? this.setState(prevState => ({
+ 			((b === 'college')? this.setState(prevState => ({
  				newUser : {
  					...prevState.newUser,
  					college : val
@@ -159,6 +160,49 @@ class Form extends React.Component{
  	saveToState(e){ //get the value onChange and setState accordingly.
  		let name = e.target.name;
  		let val = e.target.value;
+ 		let id = e.target.id;
+ 		let type = e.target.type;
+ 		if(type === 'radio')
+ 		{
+ 			this.setState(prevState=>({
+ 				newUser : {
+ 					...prevState.newUser,
+ 					[name] : id
+ 				}
+ 			}));
+ 		}
+ 		else if(type === 'checkbox' && name === 'data_experience')
+ 		{
+ 			let checked = e.target.checked;
+ 			if (checked)
+ 			{
+ 				let arr = this.state.newUser.data_experience;
+ 				arr.push(id);
+ 				this.setState(prevState=>({
+ 					newUser : {
+ 						...prevState.newUser,
+ 						data_experience : arr
+ 					}
+ 				}));
+ 			}
+ 			else
+ 			{
+ 				let arr = this.state.newUser.data_experience;
+ 				let index = arr.indexOf(id);
+ 				if(index > -1)
+ 				{
+ 					arr.splice(index, 1);
+ 				}
+ 				this.setState(prevState=>({
+ 					newUser : {
+ 						...prevState.newUser,
+ 						data_experience : arr
+ 					}
+ 				}));
+ 			}
+ 		}
+ 		else
+ 		{
  		this.setState(prevState=>({
  			newUser : {
  				...prevState.newUser,
@@ -166,7 +210,7 @@ class Form extends React.Component{
  			}
  		}));
  	}
-
+ 	}
 		render(){
 			console.log(this.state.newUser);
 			//this.getDataSource(this.state.address, 'city');
@@ -194,9 +238,7 @@ class Form extends React.Component{
 								<RadioInputGroup values = {['male', 'female']} name = 'gender' ids = {['male', 'female']} innerHtmls = {['Nam', 'Nữ']} onChange = {e => this.saveToState(e)}/>
 							</div>
 							<div className = 'col'>
-								<label>
-								Ngày sinh
-								</label>
+								<label>Ngày sinh</label>
 								<input type = 'date' className='form-control' max = {this.getMaxDateFormat()} name = 'dob' onChange = {e => this.saveToState(e)}/>
 							</div>
 						</div>
@@ -235,8 +277,8 @@ class Form extends React.Component{
 							</div>
 						</div>
 						<WorkingAbility onChange = {e => this.saveToState(e)}/>
-						<DataCheckBox/>
-						<DataRadioBox/>
+						<DataCheckBox onChange = {e => this.saveToState(e)}/>
+						<DataRadioBox onChange = {e => this.saveToState(e)}/>
 					</div>
 					<SubmitButton/>
 				</form>

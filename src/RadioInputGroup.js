@@ -19,7 +19,7 @@ class RadioInputGroup extends React.Component
 		let returned = [];
 		for ( i = 0; i < this.props.values.length; i++)
 		{
-			returned.push(<RadioInput value = {this.props.values[i]} id = {this.props.ids[i]} innerHtml = {this.props.innerHtmls[i]} onClick = {this.dummyFunction} inputClass = '' labelClass = '' name = {this.props.name}/>);
+			returned.push(<RadioInput value = {this.props.values[i]} id = {this.props.ids[i]} innerHtml = {this.props.innerHtmls[i]} onClick = {this.dummyFunction} inputClass = '' labelClass = '' name = {this.props.name} key = {this.props.ids[i]}/>);
 		}
 		return(
 			<>
