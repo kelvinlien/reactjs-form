@@ -34,6 +34,7 @@ class WorkingAbility extends React.Component
  	}
 	render()
 	{
+		console.log(this.state);
 		let returned = [];
 		let i;
 		let lim = this.dataSet.names.length;

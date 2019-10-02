@@ -7,7 +7,8 @@ class DataCheckBox extends React.Component{
 			experienced : false,
 			experiences : 0,
 			none_checkstate : false,
-			data_experience : []
+			data_experience : [],
+			experience_more_info : ''
 		};
 		this.dataSet = {
 				ids : ['interviewer', 'supervisor', 'tester', 'statistic', 'analytic', 'none-exp'],
@@ -15,6 +16,7 @@ class DataCheckBox extends React.Component{
 				innerHtmls : ['Đã từng làm điều tra viên/phỏng vấn viên', 'Đã từng làm giám sát viên', 'Đã từng kiểm thử (test) bảng hỏi, góp ý/đề xuất điều chỉnh nội dung bảng hỏi giấy', 'Đã từng nhập liệu sử dụng các phần mềm thống kê (Excel/SPSS/Stata/…)', 'Đã từng phân tích dữ liệu sử dụng các công cụ phân tích (Excel/Stata/R/…)', 'Chưa có kinh nghiệm nào']
 	};
 		this.changeHandler = this.changeHandler.bind(this);
+		this.saveToState = this.saveToState.bind(this);
 	}
 	debugger()
 	{
@@ -99,11 +101,19 @@ class DataCheckBox extends React.Component{
  		data_experience : arr
  		}));
 	}
+	saveToState(e){ //get the value onChange and setState accordingly.
+ 		let name = e.target.name;
+ 		let val = e.target.value;
+ 		this.setState(()=>({
+ 				[name] : val
+ 		}));
+ 	}
 	render(){
+		console.log(this.state);
 		return(
 		<div id='DataCheckBox'>
 			<label htmlFor ='DataCheckBox'>Kinh nghiệm về dữ liệu</label>
-			<CustomCheckboxGroup ids = {this.dataSet.ids} name = {this.dataSet.name} onClick= {e => this.changeHandler(e)} innerHtmls = {this.dataSet.innerHtmls} />
+			<CustomCheckboxGroup ids = {this.dataSet.ids} name = {this.dataSet.name} onClick= {e => this.changeHandler(e)} innerHtmls = {this.dataSet.innerHtmls} required = 'true'/>
 
 			{this.state.experiences > 0 && this.state.none_checkstate === true &&
 				<div className="alert alert-danger" role="alert" >Lựa chọn có mâu thuẫn. Vui lòng chọn lại!</div>
@@ -113,7 +123,7 @@ class DataCheckBox extends React.Component{
 			}
 			{this.state.experienced === true &&
 			<div>
-				<textarea className = 'form-control' rows = '4' cols = '60' id = 'more-info' />
+				<textarea className = 'form-control' rows = '4' cols = '60' id = 'more-info' name = 'experience_more_info' onChange = {this.saveToState} value = {this.state.experience_more_info}/>
 			</div>
 			}
 

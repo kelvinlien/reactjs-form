@@ -68,6 +68,7 @@ class EducationSelectGroup extends React.Component
  	}
 	render()
 	{
+		console.log(this.state);
 		return(
 			<>
 				<div className = 'text-center'>Học vấn</div>

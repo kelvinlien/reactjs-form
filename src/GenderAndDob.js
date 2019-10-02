@@ -36,6 +36,7 @@ class GenderAndDob extends React.Component
  	}
 	render()
 	{
+		console.log(this.state);
 		return(		
 			<div className = 'row'>
 				<div className = 'col'>

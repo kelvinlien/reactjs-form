@@ -11,18 +11,8 @@ import GenderAndDob from './GenderAndDob.js';
 class Form extends React.Component{
 	constructor(props){
 		super(props);
-		this.state = {
-				picture : '',
-				fullName : '',
-				gender : '',
-				dob : '',
-				email : '',
-				phone : '',
-				userID : '',
-		};
 	}
 	render(){
-			console.log(this.state);
 			//this.getDataSource(this.state.address, 'city');
 			return(
 				<form>

@@ -28,6 +28,7 @@ class ContactANDID extends React.Component
  	}
 	render()
 	{
+		console.log(this.state);
 		let returned = [];
 		let i;
 		for ( i = 0 ; i < this.dataSet.types.length; i++)

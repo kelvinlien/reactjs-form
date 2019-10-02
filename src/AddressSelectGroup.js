@@ -26,6 +26,7 @@ class AddressSelectGroup extends React.Component
 		};
 		this.loadSelectOptions = this.loadSelectOptions.bind(this);
 		this.checkAddressFormat = this.checkAddressFormat.bind(this);
+		this.saveToState = this.saveToState.bind(this);
 	}
 	loadSelectOptions(a, b){//load the select options according to the prior choice in the address hierarchy. Input a is an object or array of addresses to load into select options, b is the position of that selection in the address hierarchy.
  		let options = [];
@@ -78,8 +79,16 @@ class AddressSelectGroup extends React.Component
  				console.log('something went wrong');
  			}
  		}
+ 	saveToState(e){ //get the value onChange and setState accordingly.
+ 		let name = e.target.name;
+ 		let val = e.target.value;
+ 		this.setState(()=>({
+ 				[name] : val
+ 		}));
+ 	}
 	render()
 	{
+		console.log(this.state);
 		return(
 			<>
 				<div className = 'text-center'>Địa chỉ liên hệ</div>
@@ -100,11 +109,11 @@ class AddressSelectGroup extends React.Component
 					</div>
 					<div className = 'col'>
 						<div className = 'text-center'>Số nhà - Đường</div>
-						<input type = 'text' className = 'form-control' name ='road' onChange = {this.props.saveToState} />
+						<input type = 'text' className = 'form-control' name ='road' onChange = {this.saveToState} value={this.state.road}/>
 					</div>
 				</div>
 				<div>
-					<textarea cols = '50' rows = '3' placeholder = 'Ghi chú thêm chỉ dẫn về địa chỉ' className = 'form-control' name = 'address_more_info' onChange = {this.props.saveToState}/>
+					<textarea cols = '50' rows = '3' placeholder = 'Ghi chú thêm chỉ dẫn về địa chỉ' className = 'form-control' name = 'address_more_info' onChange = {this.saveToState} value = {this.state.address_more_info}/>
 				</div>
 			</>
 			);

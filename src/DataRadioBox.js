@@ -52,8 +52,6 @@ class DataRadioBox extends React.Component{
 		}
 	}
 	render(){
-		//this.debugger();
-		// console.log(this.state);
 		console.log(this.state);
 		return(
 		<div id='DataRadioBox'>
