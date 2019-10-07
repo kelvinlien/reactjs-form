@@ -18,8 +18,37 @@ class Form extends React.Component{
 	componentDidMount(){
 		$('#submit').click(function(){
 			$('form').attr('action', 'http://localhost/react/index.php').attr('method', 'post').submit();
+	});
+		$("#alert").click(function(){
+			var name = $("#fullName").val();
+			$.post({
+				url : "http://localhost/react/test.php",
+				data : {"name" : name},
+				success : function(data, status){
+					if (name !== '')
+					{					
+						alert(data);
+						$("#submit").click();
+					}
+					else
+					{
+						alert("Please tell me your name.");
+					}
+				}
+			});
 		});
-	}
+		// $("#alert").click(function(){
+		// 	$.post({
+		// 		url : "http://localhost/react/test.txt",
+		// 		success : function(data, status){
+		// 			alert("Data: " + data + "\nStatus: " + status);
+		// 		},
+		// 		dataType : 'text'
+		// 		} 
+		// 	);
+		// });
+
+}
 	render(){
 			return(
 				<form >
@@ -35,6 +64,7 @@ class Form extends React.Component{
 						<DataCheckBox />
 						<DataRadioBox />
 					</div>
+					<button id = 'alert' type = 'button' className = 'btn btn-info'/>
 					<SubmitButton/>
 				</form>
 				);
