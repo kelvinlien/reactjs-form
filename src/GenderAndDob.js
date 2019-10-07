@@ -40,7 +40,7 @@ class GenderAndDob extends React.Component
 		return(		
 			<div className = 'row'>
 				<div className = 'col'>
-					<RadioInputGroup values = {['male', 'female']} name = 'gender' ids = {['male', 'female']} innerHtmls = {['Nam', 'Nữ']} onChange = {e => this.saveToState(e)}/>
+					<RadioInputGroup values = {['male', 'female']} name = 'gender' ids = {['male', 'female']} innerHtmls = {['Nam', 'Nữ']} onChange = {e => this.saveToState(e)} value = {this.state.gender}/>
 				</div>
 				<div className = 'col'>
 					<label>Ngày sinh</label>

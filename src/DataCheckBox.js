@@ -12,7 +12,7 @@ class DataCheckBox extends React.Component{
 		};
 		this.dataSet = {
 				ids : ['interviewer', 'supervisor', 'tester', 'statistic', 'analytic', 'none-exp'],
-				name : 'data_experience',
+				name : 'data_experience[]',
 				innerHtmls : ['Đã từng làm điều tra viên/phỏng vấn viên', 'Đã từng làm giám sát viên', 'Đã từng kiểm thử (test) bảng hỏi, góp ý/đề xuất điều chỉnh nội dung bảng hỏi giấy', 'Đã từng nhập liệu sử dụng các phần mềm thống kê (Excel/SPSS/Stata/…)', 'Đã từng phân tích dữ liệu sử dụng các công cụ phân tích (Excel/Stata/R/…)', 'Chưa có kinh nghiệm nào']
 	};
 		this.changeHandler = this.changeHandler.bind(this);

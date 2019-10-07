@@ -60,13 +60,13 @@ class DataRadioBox extends React.Component{
 			<label htmlFor = 'project-select'>Dự án muốn tham gia</label>
 			{this.state.checked === true && this.state.tele_checkstate === false &&
 			<div id = 'project-select' className = "custom-control custom-radio">
-				<input type = 'radio' id='project' name='project' className = 'custom-control-input'/>
+				<input type = 'radio' id='project' name='project' className = 'custom-control-input' value = {this.state.sp_checkstate === true ? 'ProductDev&CustomerSp' : 'ProductDev'}/>
 				<label className = 'custom-control-label' htmlFor='project'>R&D Phát triển sản phẩm {this.state.sp_checkstate === true && '& Hỗ trợ khách hàng'}</label>
 			</div>
 			}
 			{this.state.tele_checkstate === true &&
 			<div id = 'project-select' className = "custom-control custom-radio">
-				<input type = 'radio' id='project' name='project' className = 'custom-control-input'/>
+				<input type = 'radio' id='project' name='project' className = 'custom-control-input' value = 'BetterWorkResearch'/>
 				<label className = 'custom-control-label' htmlFor='project'>Khảo sát đời sống Công nhân May Better Work Research VietNam</label>
 			</div>
 			}

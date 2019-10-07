@@ -8,14 +8,21 @@ import ContactAndID from './ContactAndID.js';
 import AddressAndEducation from './AddressAndEducation.js';
 import PictureAndName from './PictureAndName.js';
 import GenderAndDob from './GenderAndDob.js';
+//action = 'http://localhost/react/index.php' method = 'post'
+import $ from 'jquery';
+// export for others scripts to use
 class Form extends React.Component{
 	constructor(props){
 		super(props);
 	}
+	componentDidMount(){
+		$('#submit').click(function(){
+			$('form').attr('action', 'http://localhost/react/index.php').attr('method', 'post').submit();
+		});
+	}
 	render(){
-			//this.getDataSource(this.state.address, 'city');
 			return(
-				<form>
+				<form >
 					<div className = 'jumbotron text-left'>
 						<h1>Phiếu ứng tuyển việc làm</h1>
 					</div>

@@ -3,15 +3,15 @@ class SubmitButton extends React.Component{
 	constructor(props)
 	{
 		super(props);
-		this.submitHandler = this.submitHandler.bind(this);
+		// this.submitHandler = this.submitHandler.bind(this);
 	}
-	submitHandler(e){
-		e.preventDefault();
-	}
+	// submitHandler(e){
+	// 	e.preventDefault();
+	// }
 	render(){
 		return(
 		<div className = 'jumbotron text-center'>
-			<input type ='submit' id='submit' className = "btn btn-success" onClick = {e => this.submitHandler(e)} value = 'HOÀN THÀNH & GỬI'/>
+			<input type ='submit' id='submit' className = "btn btn-success"  value = 'HOÀN THÀNH & GỬI'/>
 		</div>
 		)
 	}

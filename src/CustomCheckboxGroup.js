@@ -14,7 +14,7 @@ class CustomCheckboxGroup extends React.Component
 		{
 			returned.push(
 				<div className = "custom-control custom-checkbox" key = {this.props.ids[i]}>
-				<CheckboxInput id = {this.props.ids[i]} name = {this.props.name} inputClass = 'custom-control-input' onClick = {this.props.onClick} labelClass = 'custom-control-label' innerHtml = {this.props.innerHtmls[i]} key = {this.props.ids[i]}/>
+				<CheckboxInput id = {this.props.ids[i]} name = {this.props.name} inputClass = 'custom-control-input' onClick = {this.props.onClick} labelClass = 'custom-control-label' innerHtml = {this.props.innerHtmls[i]} key = {this.props.ids[i]} value = {this.props.ids[i]}/>
 				</div>
 				);
 		}
