@@ -6,7 +6,8 @@ class GETData extends React.Component
 	{
 		super(props);
 		this.state = {
-			data : []
+			data : [],
+			url : "https://ci.rtworkspace.com/services/webFormManifest?formID=MNG_DAILY_PLANNING_G4"
 		}
 		this.getDataAJAX = this.getDataAJAX.bind(this);
 	}
@@ -18,8 +19,31 @@ class GETData extends React.Component
 	{
 		let _this = this;
 		$('#get').click(function(){
-			$.get({
-				url : "https://ci.rtworkspace.com/services/webFormManifest?formID=MNG_DAILY_PLANNING_G4",
+			$.ajax({
+				xhr: function()
+  				{
+  					console.log('enter xhr function');
+  					var xhr = new window.XMLHttpRequest();
+    				//Download progress
+    				xhr.addEventListener("progress", function(evt){
+    					console.log('this is evt.loaded value: ' + evt.loaded);
+    					let contentLength;
+      					if (evt.lengthComputable) { //this condition is not executed
+      						contentLength = evt.total;
+      					}
+      					else {
+    						contentLength = parseInt(evt.target.getResponseHeader('x-decompressed-content-length'), 10);
+    					}
+        				var percentComplete = evt.loaded / contentLength; //evt.total = 0
+        				//Do something with download progress
+        				console.log('this is evt.total value: ' + contentLength);
+        				console.log(percentComplete);
+      					console.log('download phrase');
+    				}, false);
+    				return xhr;
+  				},
+				type : 'GET',
+				url : _this.state.url,
 				success : function(data, status)
 				{
 					_this.setState(() => ({
@@ -32,7 +56,7 @@ class GETData extends React.Component
  							data[key].forEach( function(element) {
 								for (var key in element)
 								{
-									if (key == 'filename')
+									if (key === 'filename')
 									{
 										_this.setState(state => ({
 											data : [...state.data, element[key]]
@@ -42,7 +66,6 @@ class GETData extends React.Component
  							});
  						}
 					}
-					console.log(_this.state.data);
 				},
 				dataType : 'json'
 			});

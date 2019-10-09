@@ -9,6 +9,7 @@ import AddressAndEducation from './AddressAndEducation.js';
 import PictureAndName from './PictureAndName.js';
 import GenderAndDob from './GenderAndDob.js';
 import AlertAJAXTest from './AlertAJAXTest.js';
+import ProgressBar from './ProgressBar.js';
 //action = 'http://localhost/react/index.php' method = 'post'
 import $ from 'jquery';
 // export for others scripts to use
@@ -59,6 +60,7 @@ class Form extends React.Component{
 						<DataRadioBox />
 						<GETData />
 						<AlertAJAXTest />
+						<ProgressBar progress = '40'/>
 					</div>
 					<SubmitButton/>
 				</form>
