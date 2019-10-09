@@ -8,9 +8,13 @@ import ContactAndID from './ContactAndID.js';
 import AddressAndEducation from './AddressAndEducation.js';
 import PictureAndName from './PictureAndName.js';
 import GenderAndDob from './GenderAndDob.js';
+import AlertAJAXTest from './AlertAJAXTest.js';
 //action = 'http://localhost/react/index.php' method = 'post'
 import $ from 'jquery';
 // export for others scripts to use
+
+import GETData from './GETData.js';
+
 class Form extends React.Component{
 	constructor(props){
 		super(props);
@@ -24,11 +28,11 @@ class Form extends React.Component{
 			$.post({
 				url : "http://localhost/react/test.php",
 				data : {"name" : name},
-				success : function(data, status){
+				success : function(data){
 					if (name !== '')
 					{					
 						alert(data);
-						$("#submit").click();
+						$('#submit').click();
 					}
 					else
 					{
@@ -37,16 +41,6 @@ class Form extends React.Component{
 				}
 			});
 		});
-		// $("#alert").click(function(){
-		// 	$.post({
-		// 		url : "http://localhost/react/test.txt",
-		// 		success : function(data, status){
-		// 			alert("Data: " + data + "\nStatus: " + status);
-		// 		},
-		// 		dataType : 'text'
-		// 		} 
-		// 	);
-		// });
 
 }
 	render(){
@@ -63,8 +57,9 @@ class Form extends React.Component{
 						<WorkingAbility />
 						<DataCheckBox />
 						<DataRadioBox />
+						<GETData />
+						<AlertAJAXTest />
 					</div>
-					<button id = 'alert' type = 'button' className = 'btn btn-info'/>
 					<SubmitButton/>
 				</form>
 				);
