@@ -10,6 +10,7 @@ class GETData extends React.Component
 			url : "https://ci.rtworkspace.com/services/webFormManifest?formID=MNG_DAILY_PLANNING_G4"
 		}
 		this.getDataAJAX = this.getDataAJAX.bind(this);
+		this.randomProgress = this.randomProgress.bind(this);
 	}
 	componentDidMount()
 	{
@@ -20,32 +21,20 @@ class GETData extends React.Component
 		let _this = this;
 		$('#get').click(function(){
 			$.ajax({
-				xhr: function()
-  				{
-  					console.log('enter xhr function');
-  					var xhr = new window.XMLHttpRequest();
-    				//Download progress
-    				xhr.addEventListener("progress", function(evt){
-    					console.log('this is evt.loaded value: ' + evt.loaded);
-    					let contentLength;
-      					if (evt.lengthComputable) { //this condition is not executed
-      						contentLength = evt.total;
-      					}
-      					else {
-    						contentLength = parseInt(evt.target.getResponseHeader('x-decompressed-content-length'), 10);
-    					}
-        				var percentComplete = evt.loaded / contentLength; //evt.total = 0
-        				//Do something with download progress
-        				console.log('this is evt.total value: ' + contentLength);
-        				console.log(percentComplete);
-      					console.log('download phrase');
-    				}, false);
-    				return xhr;
-  				},
 				type : 'GET',
 				url : _this.state.url,
+				beforeSend : function()
+				{
+					$('#PB').attr('progress', 0);
+					// _this.timerID = window.setInterval(() => _this.randomProgress(), 10);
+					_this.randomProgress();
+					console.log('before send message');
+					console.log($('#PB').attr('progress'));
+				},
 				success : function(data, status)
 				{
+					// clearInterval(_this.timerID);
+					// $('#PB').attr('progress', '100');
 					_this.setState(() => ({
 						data : []
 					}));
@@ -67,9 +56,26 @@ class GETData extends React.Component
  						}
 					}
 				},
+				complete : function()
+				{
+					// clearInterval(_this.timerID);
+					$('#PB').attr('progress', '100');
+				},
 				dataType : 'json'
 			});
 		});
+
+
+
+	}
+	randomProgress()
+	{
+		while ($('#PB').attr('progress') <= 90) //check if the current progress is lower or equal to 90, modify it by adding a random number between 0 and 10.
+		{
+			let current = $('#PB').attr('progress');
+			$('#PB').attr('progress', current + Math.random() * 10 );
+			console.log(current);
+		}
 	}
 	render()
 	{

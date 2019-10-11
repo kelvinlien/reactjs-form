@@ -42,6 +42,8 @@ class Form extends React.Component{
 				}
 			});
 		});
+		var test = $('#this').attr('progress');
+		console.log(test);
 
 }
 	render(){
@@ -60,7 +62,7 @@ class Form extends React.Component{
 						<DataRadioBox />
 						<GETData />
 						<AlertAJAXTest />
-						<ProgressBar progress = '40'/>
+						<ProgressBar progress = '30'/>
 					</div>
 					<SubmitButton/>
 				</form>
