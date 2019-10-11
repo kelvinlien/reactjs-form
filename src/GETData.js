@@ -10,7 +10,6 @@ class GETData extends React.Component
 			url : "https://ci.rtworkspace.com/services/webFormManifest?formID=MNG_DAILY_PLANNING_G4"
 		}
 		this.getDataAJAX = this.getDataAJAX.bind(this);
-		this.randomProgress = this.randomProgress.bind(this);
 	}
 	componentDidMount()
 	{
@@ -25,11 +24,8 @@ class GETData extends React.Component
 				url : _this.state.url,
 				beforeSend : function()
 				{
-					$('#PB').attr('progress', 0);
-					// _this.timerID = window.setInterval(() => _this.randomProgress(), 10);
-					_this.randomProgress();
-					console.log('before send message');
-					console.log($('#PB').attr('progress'));
+					console.log('ajax before send stage');
+					$('#progress').trigger('start');
 				},
 				success : function(data, status)
 				{
@@ -58,8 +54,8 @@ class GETData extends React.Component
 				},
 				complete : function()
 				{
-					// clearInterval(_this.timerID);
-					$('#PB').attr('progress', '100');
+					console.log('the ajax completed');
+					$('#progress').trigger('stop');
 				},
 				dataType : 'json'
 			});
@@ -67,15 +63,6 @@ class GETData extends React.Component
 
 
 
-	}
-	randomProgress()
-	{
-		while ($('#PB').attr('progress') <= 90) //check if the current progress is lower or equal to 90, modify it by adding a random number between 0 and 10.
-		{
-			let current = $('#PB').attr('progress');
-			$('#PB').attr('progress', current + Math.random() * 10 );
-			console.log(current);
-		}
 	}
 	render()
 	{

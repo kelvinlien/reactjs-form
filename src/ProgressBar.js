@@ -1,35 +1,59 @@
 import React from 'react';
 import equal from 'fast-deep-equal';
+import $ from 'jquery';
 class ProgressBar extends React.Component
 {
 	constructor(props)
 	{
 		super(props);
 		this.state = {
-			progress : this.props.progress
+			progress : 0
+		};
+		this.startTheBar = this.startTheBar.bind(this);
+		this.stopTheBar = this.stopTheBar.bind(this);
+		this.makeProgress = this.makeProgress.bind(this);
+	}
+
+	startTheBar()
+	{
+		console.log('start the bar');
+		this.timerID = setInterval(this.makeProgress, 50);
+	}
+
+	stopTheBar()
+	{
+		console.log('stop the bar');
+		clearInterval(this.timerID);
+		this.setState (() => ({
+			progress : 100
+		}));
+	}
+
+	makeProgress()
+	{
+		if(this.state.progress <= 90)
+		{
+			this.setState( prevState => ({
+				progress : prevState.progress + (Math.random() * 10)
+			}));
 		}
 	}
 
-	shouldComponentUpdate(nextProps){
-    	return nextProps.progress !== this.state.progress;
+	componentDidMount()
+	{
+		$('#progress').on("start", this.startTheBar).on("stop", this.stopTheBar);
 	}
-	
-	componentDidUpdate(prevProps) {
-    		this.setState(() => ({
-    			progress : this.props.progress
-    		}));
-	} 
 
 	render()
 	{
-		console.log('this got rendered');
+		console.log('progress bar got rendered');
 		let style = {
-			width : this.props.progress + "%"
+			width : this.state.progress + "%"
 		}
 		return(
-			<div className="progress" id = 'progress'>
-  				<div className="progress-bar" role="progressbar" aria-valuenow={this.props.progress} aria-valuemin="0" aria-valuemax="100" style = {style}>
-    				<span className="sr-only">{this.props.progress}% Complete</span>
+			<div className="progress" id = 'progress' >
+  				<div className="progress-bar" role="progressbar" aria-valuenow={this.state.progress} aria-valuemin="0" aria-valuemax="100" style = {style}>
+    				<span className="sr-only">{this.state.progress}% Complete</span>
   				</div>
 			</div>
 		);
