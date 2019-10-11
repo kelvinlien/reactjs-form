@@ -15,7 +15,7 @@ class ProgressBar extends React.Component
 
 	startTheBar()
 	{
-		$('#progress').show();
+		$('.progress').show();
 		console.log('start the bar');
 		this.timerID = setInterval(this.makeProgress, 50);
 	}
@@ -27,7 +27,7 @@ class ProgressBar extends React.Component
 		this.setState (() => ({
 			progress : 100
 		}));
-		$('#progress').fadeOut(2500);
+		$('.progress').fadeOut(2500);
 	}
 
 	makeProgress()
@@ -42,7 +42,7 @@ class ProgressBar extends React.Component
 
 	componentDidMount()
 	{
-		$('#progress').on("start", this.startTheBar).on("stop", this.stopTheBar).hide();
+		$('.progress').on("start", this.startTheBar).on("stop", this.stopTheBar).hide();
 	}
 
 	render()
@@ -52,7 +52,7 @@ class ProgressBar extends React.Component
 			width : this.state.progress + "%"
 		}
 		return(
-			<div className="progress" id = 'progress' >
+			<div className="progress" >
   				<div className="progress-bar" role="progressbar" aria-valuenow={this.state.progress} aria-valuemin="0" aria-valuemax="100" style = {style}>
     				<span className="sr-only">{this.state.progress}% Complete</span>
   				</div>

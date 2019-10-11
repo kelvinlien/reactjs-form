@@ -59,7 +59,6 @@ class Form extends React.Component{
 						<DataCheckBox />
 						<DataRadioBox />
 						<GETData />
-						<ProgressBar/>
 						<AlertAJAXTest />
 					</div>
 					<SubmitButton/>
