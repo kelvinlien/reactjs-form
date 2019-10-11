@@ -1,5 +1,4 @@
 import React from 'react';
-import equal from 'fast-deep-equal';
 import $ from 'jquery';
 class ProgressBar extends React.Component
 {
@@ -33,7 +32,7 @@ class ProgressBar extends React.Component
 
 	makeProgress()
 	{
-		if(this.state.progress <= 91)
+		if(this.state.progress < 91)
 		{
 			this.setState( prevState => ({
 				progress : prevState.progress + (Math.random() * 10)
