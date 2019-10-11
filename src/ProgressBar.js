@@ -16,6 +16,7 @@ class ProgressBar extends React.Component
 
 	startTheBar()
 	{
+		$('#progress').show();
 		console.log('start the bar');
 		this.timerID = setInterval(this.makeProgress, 50);
 	}
@@ -27,11 +28,12 @@ class ProgressBar extends React.Component
 		this.setState (() => ({
 			progress : 100
 		}));
+		$('#progress').fadeOut(2500);
 	}
 
 	makeProgress()
 	{
-		if(this.state.progress <= 90)
+		if(this.state.progress <= 91)
 		{
 			this.setState( prevState => ({
 				progress : prevState.progress + (Math.random() * 10)
@@ -41,7 +43,7 @@ class ProgressBar extends React.Component
 
 	componentDidMount()
 	{
-		$('#progress').on("start", this.startTheBar).on("stop", this.stopTheBar);
+		$('#progress').on("start", this.startTheBar).on("stop", this.stopTheBar).hide();
 	}
 
 	render()
