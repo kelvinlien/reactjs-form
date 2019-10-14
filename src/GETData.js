@@ -9,7 +9,7 @@ class GETData extends React.Component
 		this.state = {
 			data : [],
 			// data : ['dataSetting.db', 'formSetting.db', 'schema.json', 'MNG_DAILY_PLANNING_G4.db', 'MNG_DAILY_PLANNING.db'],
-			url : "https://ci.rtworkspace.com/services/webFormManifest?formID=MNG_DAILY_PLANNING_G4"
+			url : "https://ci.rtworkspace.com/services/webFormManifest?formID=JICA_NE_POST_PCT_RP_TRAINING_G4"
 		}
 		this.getDataAJAX = this.getDataAJAX.bind(this);
 	}
@@ -42,6 +42,36 @@ class GETData extends React.Component
 										_this.setState(state => ({
 											data : [...state.data, element[key]]
 										}));
+
+										if (element[key] === 'dataSetting.db')
+										{
+											$.post({
+												url : 'https://ci.rtworkspace.com/webapp/webform/handleDatasetting',
+												data : {
+													formID : 'JICA_NE_POST_PCT_RP_TRAINING_G4',
+													username : 'rta_kynguyen',
+													filename: 'resources/familyMedia/JICA_NE_POST_PCT_RP_TRAINING/dataSetting.db',
+													downloadLink : 'https://ci.rtworkspace.com/cpms/resourceCenterV2/getConverted?code=zHSA4ye6t6'
+												},
+												success : function()
+												{
+													$.post({
+														url : 'https://ci.rtworkspace.com/webapp/webform/handleDownload',
+														data : {
+															formID : 'JICA_NE_POST_PCT_RP_TRAINING_G4',
+															mediaType: 'data',
+															username : 'rta_kynguyen',
+															filename: 'resources/familyMedia/JICA_NE_POST_PCT_RP_TRAINING/idlist.db',
+															downloadLink : 'https://ci.rtworkspace.com/api/dm/getData?token=your_token_here&dm_name=pct_list&max_order=0&format=sqlite&mode=download'
+														},
+														success : function(data, status, xhr){
+															alert(data);
+														}
+
+													});
+												}
+											});
+										}
 									}
 								}
  							});
