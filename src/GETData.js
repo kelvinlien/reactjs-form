@@ -7,7 +7,8 @@ class GETData extends React.Component
 	{
 		super(props);
 		this.state = {
-			data : ['dataSetting.db', 'formSetting.db', 'schema.json', 'MNG_DAILY_PLANNING_G4.db', 'MNG_DAILY_PLANNING.db'],
+			data : [],
+			// data : ['dataSetting.db', 'formSetting.db', 'schema.json', 'MNG_DAILY_PLANNING_G4.db', 'MNG_DAILY_PLANNING.db'],
 			url : "https://ci.rtworkspace.com/services/webFormManifest?formID=MNG_DAILY_PLANNING_G4"
 		}
 		this.getDataAJAX = this.getDataAJAX.bind(this);
@@ -15,7 +16,7 @@ class GETData extends React.Component
 	componentDidMount()
 	{
 		this.getDataAJAX();
-		$('#known').hide();
+		$('#filename').hide();
 	}
 	getDataAJAX()
 	{
@@ -24,38 +25,39 @@ class GETData extends React.Component
 			$.ajax({
 				type : 'GET',
 				url : _this.state.url,
-				beforeSend : function()
+				success : function(data, status, xhr)
 				{
-					$('#known').show();
-					console.log('ajax before send stage');
+					_this.setState(() => ({
+						data : []
+					}));
+					for ( var key in data )
+					{
+ 						if (Array.isArray(data[key]))
+ 						{
+ 							data[key].forEach( function(element) {
+								for (var key in element)
+								{
+									if (key === 'filename')
+									{
+										_this.setState(state => ({
+											data : [...state.data, element[key]]
+										}));
+									}
+								}
+ 							});
+ 						}
+					}
+
+					$('#filename').show();
 					$('.progress').trigger('start');
+
 				},
-				success : function(data, status)
+				error : function()
 				{
-					// _this.setState(() => ({
-					// 	data : []
-					// }));
-					// for ( var key in data )
-					// {
- 				// 		if (Array.isArray(data[key]))
- 				// 		{
- 				// 			data[key].forEach( function(element) {
-					// 			for (var key in element)
-					// 			{
-					// 				if (key === 'filename')
-					// 				{
-					// 					_this.setState(state => ({
-					// 						data : [...state.data, element[key]]
-					// 					}));
-					// 				}
-					// 			}
- 				// 			});
- 				// 		}
-					// }
+					alert('Something went wrong. Please check your internet connection and try again.');
 				},
 				complete : function()
 				{
-					console.log('the ajax completed');
 					$('.progress').trigger('stop');
 				},
 				dataType : 'json'
@@ -80,7 +82,7 @@ class GETData extends React.Component
 			<div>
   					<button type="button" className="btn btn-primary" id = 'get'>Perform GET
   					</button>
-  					<ul id = 'known'>List of filename:
+  					<ul id = 'filename'>List of filename:
   						{returned}
   					</ul>
 			</div>

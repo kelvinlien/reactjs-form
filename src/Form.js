@@ -9,7 +9,6 @@ import AddressAndEducation from './AddressAndEducation.js';
 import PictureAndName from './PictureAndName.js';
 import GenderAndDob from './GenderAndDob.js';
 import AlertAJAXTest from './AlertAJAXTest.js';
-import ProgressBar from './ProgressBar.js';
 //action = 'http://localhost/react/index.php' method = 'post'
 import $ from 'jquery';
 // export for others scripts to use
@@ -17,9 +16,6 @@ import $ from 'jquery';
 import GETData from './GETData.js';
 
 class Form extends React.Component{
-	constructor(props){
-		super(props);
-	}
 	componentDidMount(){
 		$('#submit').click(function(){
 			$('form').attr('action', 'http://localhost/react/index.php').attr('method', 'post').submit();
@@ -59,7 +55,6 @@ class Form extends React.Component{
 						<DataCheckBox />
 						<DataRadioBox />
 						<GETData />
-						<AlertAJAXTest />
 					</div>
 					<SubmitButton/>
 				</form>
