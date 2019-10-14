@@ -8,8 +8,12 @@ class GETData extends React.Component
 		super(props);
 		this.state = {
 			data : [],
-			// data : ['dataSetting.db', 'formSetting.db', 'schema.json', 'MNG_DAILY_PLANNING_G4.db', 'MNG_DAILY_PLANNING.db'],
-			url : "https://ci.rtworkspace.com/services/webFormManifest?formID=JICA_NE_POST_PCT_RP_TRAINING_G4"
+			dataSetting : [],
+			url : ["https://ci.rtworkspace.com/services/webFormManifest?formID=JICA_NE_POST_PCT_RP_TRAINING_G4", 'https://ci.rtworkspace.com/webapp/webform/handleDatasetting', 'https://ci.rtworkspace.com/webapp/webform/handleDownload'],
+			formID : '',
+			mediaType: 'data',
+			username : 'rta_kynguyen',
+			filename : 'resources/familyMedia/JICA_NE_POST_PCT_RP_TRAINING/'
 		}
 		this.getDataAJAX = this.getDataAJAX.bind(this);
 	}
@@ -22,73 +26,97 @@ class GETData extends React.Component
 	{
 		let _this = this;
 		$('#get').click(function(){
-			$.ajax({
+			$.ajax({							//perform GET the first link, save formID to state, throw error if something went wrong.
 				type : 'GET',
-				url : _this.state.url,
-				success : function(data, status, xhr)
+				url : _this.state.url[0],
+				success : function(data)
 				{
+					let id = data['formID'];
 					_this.setState(() => ({
-						data : []
+						data : [],
+						formID : id
 					}));
-					for ( var key in data )
+					let key;
+					for ( key in data )			//loop through response data
 					{
- 						if (Array.isArray(data[key]))
+ 						if (Array.isArray(data[key]))		//array of files or media
  						{
  							data[key].forEach( function(element) {
-								for (var key in element)
+ 								let ele;
+								for (ele in element)
 								{
-									if (key === 'filename')
+									if (ele === 'filename')		//save filename to state.data
 									{
 										_this.setState(state => ({
-											data : [...state.data, element[key]]
+											data : [...state.data, element[ele]]
 										}));
 
-										if (element[key] === 'dataSetting.db')
+										if (element[ele] === 'dataSetting.db')		//catch the db file we need
 										{
-											$.post({
-												url : 'https://ci.rtworkspace.com/webapp/webform/handleDatasetting',
+											$.post({						//perform POST to second link, pass the filename and downloadLink of the db file
+												url : _this.state.url[1] ,
 												data : {
-													formID : 'JICA_NE_POST_PCT_RP_TRAINING_G4',
-													username : 'rta_kynguyen',
-													filename: 'resources/familyMedia/JICA_NE_POST_PCT_RP_TRAINING/dataSetting.db',
-													downloadLink : 'https://ci.rtworkspace.com/cpms/resourceCenterV2/getConverted?code=zHSA4ye6t6'
+													formID : _this.state.formID,
+													username : _this.state.username,
+													filename: _this.state.filename + element['filename'],
+													downloadLink : element['downloadLink']
 												},
-												success : function()
+												success : function(data)
 												{
-													$.post({
-														url : 'https://ci.rtworkspace.com/webapp/webform/handleDownload',
-														data : {
-															formID : 'JICA_NE_POST_PCT_RP_TRAINING_G4',
-															mediaType: 'data',
-															username : 'rta_kynguyen',
-															filename: 'resources/familyMedia/JICA_NE_POST_PCT_RP_TRAINING/idlist.db',
-															downloadLink : 'https://ci.rtworkspace.com/api/dm/getData?token=your_token_here&dm_name=pct_list&max_order=0&format=sqlite&mode=download'
-														},
-														success : function(data, status, xhr){
-															alert(data);
-														}
+													_this.setState(() => ({		//init state.dataSetting
+														dataSetting : []
+													}));
+													let key;
+													for (key in data)			
+													{
+														if (Array.isArray(data[key]))		//array of files or media
+														{
+															data[key].forEach( function(element) {
+																let ele;
+																for (ele in element)
+																{
+																	if (ele === 'filename')
+																	{
+																		_this.setState(state => ({		//save to state.dataSetting
+																			dataSetting : [...state.dataSetting, element[ele]]
+																		}));
+																		$('#filename').show();		//show the List of filename
+																		$('.progress').trigger('start');		//start the progress bar
+																		$.ajax({		//perform POST to the third link, pass filename and downloadLink.
+																			method : 'post',
+																			url : _this.state.url[2],
+																			data : {
+																				formID : _this.state.formID,
+																				mediaType: _this.state.mediaType,
+																				username : _this.state.username,
+																				filename: _this.state.filename + element['filename'],
+																				downloadLink : element['downloadLink']
+																			}
 
-													});
-												}
+																		});
+																	}
+																}
+															});
+														}
+													}
+												},
+												complete : function (){
+													$('.progress').trigger('stop');			//stop the progress bar
+												},
+												dataType : 'json'		//make sure we can loop through response and use bracket notation on it
 											});
 										}
 									}
+									break;
 								}
  							});
  						}
 					}
 
-					$('#filename').show();
-					$('.progress').trigger('start');
-
 				},
 				error : function()
 				{
 					alert('Something went wrong. Please check your internet connection and try again.');
-				},
-				complete : function()
-				{
-					$('.progress').trigger('stop');
 				},
 				dataType : 'json'
 			});
@@ -100,7 +128,7 @@ class GETData extends React.Component
 	render()
 	{
 		let returned = [];
-		this.state.data.forEach( function(element, index) {
+		this.state.dataSetting.forEach( function(element, index) {
 			returned.push(
 				<li key = {index}>
 					{element}
