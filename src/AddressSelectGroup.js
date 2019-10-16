@@ -39,7 +39,8 @@ class AddressSelectGroup extends React.Component
  		}
  		else
  		{
- 			for(let key in a)
+ 			let key;
+ 			for(key in a)
  			{
  				let obj = {value : key, label : key, id : b};
  				options.push(obj);

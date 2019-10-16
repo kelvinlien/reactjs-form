@@ -31,7 +31,7 @@ class PictureAndName extends React.Component
     				</div>
    				</div>
 				<div className = 'col-lg-8'>
-					<input placeholder="Họ tên" className='form-control' type='text' name = 'fullName' onChange = {e => this.saveToState(e)} value = {this.state.fullName}/>
+					<input placeholder="Họ tên" className='form-control' type='text' name = 'fullName' id = 'fullName' onChange = {e => this.saveToState(e)} value = {this.state.fullName}/>
 				</div>
 			</div>
 			);

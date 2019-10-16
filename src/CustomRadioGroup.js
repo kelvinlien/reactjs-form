@@ -1,10 +1,6 @@
 import React from 'react';
 import RadioInput from './RadioInput.js';
 class CustomRadioInput extends React.Component{
-	constructor(props)
-	{
-		super(props);
-	}
 	render()
 	{
 		let i;

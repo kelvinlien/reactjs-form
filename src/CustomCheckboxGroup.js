@@ -2,10 +2,6 @@ import React from 'react';
 import CheckboxInput from './CheckboxInput.js';
 class CustomCheckboxGroup extends React.Component
 {
-	constructor(props)
-	{
-		super(props);
-	}
 	render()
 	{
 		let returned = [];

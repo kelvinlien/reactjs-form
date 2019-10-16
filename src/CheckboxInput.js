@@ -2,10 +2,6 @@ import React from 'react';
 class CheckboxInput extends React.Component
 //Usage: for every checkbox in the form
 {
-	constructor(props)
-	{
-		super(props);
-	}
 	render()
 	{
 		return(

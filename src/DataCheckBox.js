@@ -81,8 +81,6 @@ class DataCheckBox extends React.Component{
 				}
 			}
 		}
-		let name = e.target.name;
- 		let val = e.target.value;
  		let checked = e.target.checked;
  		let arr = this.state.data_experience;
  		if (checked)
