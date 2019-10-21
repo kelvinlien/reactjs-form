@@ -24,7 +24,7 @@ class Form extends React.Component{
 			var name = $("#fullName").val();
 			$.post({
 				url : "http://localhost/react/test.php",
-				data : {"name" : name},
+				data : {'name' : name},
 				success : function(data){
 					if (name !== '')
 					{					
@@ -35,6 +35,7 @@ class Form extends React.Component{
 					{
 						alert("Please tell me your name.");
 					}
+					alert(data);
 				}
 			});
 		});
