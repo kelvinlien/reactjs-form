@@ -33,7 +33,7 @@ class ProductCatalog extends React.Component{
                 for (let index in _this.state.cart)
                 {
                     let array = _this.state.cart;
-                    console.log(array[index]);
+                    // console.log(array[index]);
                     code.push(array[index]['code']);
                     buyingQuantity.push(array[index]['quantity']);
                 }
@@ -46,6 +46,7 @@ class ProductCatalog extends React.Component{
                     },
                     success : function(response)
                     {
+                        console.log(response);
                         if (response !== '[]')
                         {
                             _this.setState(()=>({

@@ -23,7 +23,6 @@ class ShoppingCart extends React.Component{
     }
     render()
     {
-        console.log(this.state.cart);
         let returned = [];
         if (!this.state.isEmpty)
         {
