@@ -23,13 +23,16 @@ class ShoppingCart extends React.Component{
     }
     render()
     {
+        console.log(this.state.cart);
         let returned = [];
         if (!this.state.isEmpty)
         {
+            let sum = 0;
             this.state.cart.forEach(function(element,index) {
+                sum += element['quantity'] * element['price'];
                 let imgPath = require("./product-images/" + element['image'] + ".jpg");
                 returned.push(
-                    <div className = 'container' key = {index}>
+                    <div className = 'container' key = {index + 1}>
                         <img src = {imgPath} alt = {element['image']} width = "auto" height = "200px"></img>
                         <p>Tên sản phẩm: {element['name']}</p>
                         <p>Giá: {element['price']}USD</p>
@@ -40,6 +43,11 @@ class ShoppingCart extends React.Component{
                     </div>
                 );
             });
+            returned.push(
+                <div className = 'sum' key = {0}>
+                    <p>Thành tiền: {sum}USD</p>
+                </div>
+            );
 
         }
         else
