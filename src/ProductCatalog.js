@@ -12,7 +12,8 @@ class ProductCatalog extends React.Component{
             code : [],
             quantity : [],
             dataLoaded : false,
-            url : 'http://localhost/shopping-cart/index.php'
+            url : 'http://localhost/shopping-cart/index.php',
+            cart : []
         };
     }
     componentDidMount()
@@ -63,6 +64,15 @@ class ProductCatalog extends React.Component{
                             {
                                 console.log(response);
                                 //alert("Bạn đã thêm sản phẩm vào giỏ hàng thành công!");
+                                if (response !== '[]')
+                                {
+                                    response = JSON.parse(response);
+                                    console.log(response);
+                                    _this.setState(()=>({
+                                        cart : response
+                                    }));
+                                }
+                                
                             }
                         })
                     });
@@ -93,14 +103,14 @@ class ProductCatalog extends React.Component{
         }
         return(
             <form method = 'POST' action = {this.state.url}>
-                <title>Simple shopping cart</title>
+                <title>Giỏ hàng siêu đơn giản</title>
                 <h1>
-                    <b>Product catalog</b>
+                    <b>Catalog sản phẩm</b>
                 </h1>
                 {returned}
                 {/* <button type = 'button' id ='test'>Alert</button>
                 <button id = 'submit' type = 'submit' className="btn btn-primary btn-lg">Toi gio hang</button> */}
-                <ShoppingCart url = {this.state.url}/>
+                <ShoppingCart url = {this.state.url} cart = {this.state.cart}/>
             </form>
         );
     }
