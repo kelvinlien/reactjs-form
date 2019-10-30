@@ -51,6 +51,11 @@ class ProductCatalog extends React.Component{
                 },
                 complete : function()       //add an event handler for rendered buttons.
                 {
+                    $('#emptyCartBtn').on('click', function(){
+                        _this.setState(()=>({
+                            cart : []
+                        }))
+                    });
                     $('.buybtn').on('click', function(){
                         let id = $(this).attr('code');
                         let val = $('#'+ id).val() === '' ? '0' : $('#'+ id).val();
@@ -60,17 +65,59 @@ class ProductCatalog extends React.Component{
                                 [id] : val,
                                 'req' : 'update'
                             },
-                            success : function(response)
+                            success : function(result)        //response is an array of only one object
                             {
-                                console.log(response);
-                                //alert("Bạn đã thêm sản phẩm vào giỏ hàng thành công!");
-                                if (response !== '[]')
+                                if (result !== '[]')
                                 {
-                                    response = JSON.parse(response);
-                                    console.log(response);
-                                    _this.setState(()=>({
-                                        cart : response
-                                    }));
+                                    let response = JSON.parse(result);
+                                    //check for previous product in state here
+                                    response = response[0];     //get the object inside the array
+                                    let index = _this.state.code.indexOf(response['code']);
+                                    let remain = _this.state.quantity[index];
+                                    if (_this.state.cart.length === 0)
+                                    {
+                                        if (parseInt(response['quantity']) <= remain)
+                                        {
+                                            let carT = [response];
+                                            _this.setState(()=>({
+                                                cart : carT
+                                            }));
+                                        }
+                                        else
+                                        {
+                                            alert("Chỉ còn lại " + remain + " sản phẩm. Vui lòng nhập lại.");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        let newCart = [];
+                                        let updated = true;
+                                        _this.state.cart.forEach(function(element, index){
+                                            if (response['code'] === element['code'])
+                                            {
+                                                let buyQuan = parseInt(response['quantity']);
+                                                let cartQuan = parseInt(element['quantity']);
+                                                buyQuan = buyQuan + cartQuan;
+                                                if (buyQuan <= remain)
+                                                {
+                                                    element['quantity'] = buyQuan.toString();
+                                                }
+                                                else
+                                                {
+                                                    alert("Chỉ còn lại " + remain + " sản phẩm. Vui lòng nhập lại.");
+                                                    updated = false;
+                                                }
+                                            }
+                                            newCart.push(element);
+                                        })
+                                        if (updated)
+                                        {   
+                                            _this.setState(()=>({
+                                                cart : newCart
+                                            }))
+                                        }
+
+                                    }
                                 }
                                 
                             }
@@ -81,6 +128,12 @@ class ProductCatalog extends React.Component{
         );
     };
 
+    // emptyCart()
+    // {
+    //     this.setState(()=>({
+    //         cart : []
+    //     }))
+    // }
     render()
     {
         let returned = [];
@@ -111,6 +164,7 @@ class ProductCatalog extends React.Component{
                 {/* <button type = 'button' id ='test'>Alert</button>
                 <button id = 'submit' type = 'submit' className="btn btn-primary btn-lg">Toi gio hang</button> */}
                 <ShoppingCart url = {this.state.url} cart = {this.state.cart}/>
+                <button type = 'button' id = 'emptyCartBtn'>Xóa tất cả</button>
             </form>
         );
     }
