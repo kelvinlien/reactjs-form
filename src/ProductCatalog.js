@@ -6,26 +6,13 @@ class ProductCatalog extends React.Component{
     {
         super(props);
         this.state = {
-            // image : ['iPhone11maxpro', 'Kindle'],
             image : [],
-            // $.get(
-            //     {
-            //         url : 'http://localhost/shopping-cart/index.php',
-            //         data : {
-            //             'data' : 'image'
-            //         },
-            //         success : function(response)
-            //         {
-            //             console.log('inside success function');
-            //             return response;
-            //         }
-            //     }
-            // ),
             name : [],
             price : [],
             code : [],
             quantity : [],
-            dataLoaded : false
+            dataLoaded : false,
+            url : 'http://localhost/shopping-cart/index.php'
         };
     }
     componentDidMount()
@@ -33,33 +20,56 @@ class ProductCatalog extends React.Component{
         let _this = this;
         $.get(
             {
-                url : 'http://localhost/shopping-cart/index.php',
+                url : _this.state.url,
                 data : {
-                    'data' : ['image','name','price','code',]
+                    'req' : 'init'
                 },
                 success : function(response)
                 {
-                    response = JSON.parse(response);
-                    for(var key in response)
+                    console.log(response);
+                    if (response !== '[]')
                     {
-                        let object = response[key];
-                        for(var key1 in object)     
+                        response = JSON.parse(response);
+                        for(var key in response)
                         {
-                            console.log(key1);
-                            var newVal = _this.state[key1];
-                            newVal.push(object[key1]);
-                            _this.setState(()=>({
-                                key1 : newVal
-                            }));
+                            let object = response[key];
+                            for(var key1 in object)     
+                            {
+                                var newVal = _this.state[key1];
+                                newVal.push(object[key1]);
+                                _this.setState(()=>({
+                                    key1 : newVal
+                                }));
+                            }
                         }
+                        _this.setState(()=>({
+                            dataLoaded : true
+                        }));
                     }
-                    _this.setState(()=>({
-                        dataLoaded : true
-                    }));
+
+                },
+                complete : function()       //add an event handler for rendered buttons.
+                {
+                    $('.buybtn').on('click', function(){
+                        let id = $(this).attr('code');
+                        let val = $('#'+ id).val() === '' ? '0' : $('#'+ id).val();
+                        $.post({            //perform POST to update the product's quantity.
+                            url : _this.state.url,
+                            data : {
+                                [id] : val,
+                                'req' : 'update'
+                            },
+                            success : function(response)
+                            {
+                                console.log(response);
+                                //alert("Bạn đã thêm sản phẩm vào giỏ hàng thành công!");
+                            }
+                        })
+                    });
                 }
             }
         );
-    }
+    };
 
     render()
     {
@@ -75,19 +85,14 @@ class ProductCatalog extends React.Component{
                         <p>{_this.state.name[index]}</p>
                         <p>{_this.state.price[index]}USD</p>
                         <input type = "number" className = 'quantity' id = {_this.state.code[index]} name = {_this.state.code[index]} image = {element} price = {_this.state.price[index]} ></input>
-                        <button className = 'buybtn' code = {_this.state.code[index]}>Buy</button>
+                        <button type = 'button' className = 'buybtn' code = {_this.state.code[index]}>Buy</button>
                     </div>
                 );
             
             });
-            $('.buybtn').on('click', function(){
-                let id = $(this).attr('code');
-                let val = $('#'+ id).val() == '' ? '0' : $('#'+ id).val();
-                console.log(val);
-            })
         }
         return(
-            <form method = 'POST' action = 'http://localhost/shopping-cart/index.php'>
+            <form method = 'POST' action = {this.state.url}>
                 <title>Simple shopping cart</title>
                 <h1>
                     <b>Product catalog</b>
@@ -95,7 +100,7 @@ class ProductCatalog extends React.Component{
                 {returned}
                 {/* <button type = 'button' id ='test'>Alert</button>
                 <button id = 'submit' type = 'submit' className="btn btn-primary btn-lg">Toi gio hang</button> */}
-                <ShoppingCart />
+                <ShoppingCart url = {this.state.url}/>
             </form>
         );
     }
