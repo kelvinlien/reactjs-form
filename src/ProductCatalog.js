@@ -91,7 +91,8 @@ class ProductCatalog extends React.Component{
                                     else
                                     {
                                         let newCart = [];
-                                        let updated = true;
+                                        let updated = true;     //if the quantity should be updated
+                                        let exist = false;      //if the buying product is already in cart
                                         _this.state.cart.forEach(function(element, index){
                                             if (response['code'] === element['code'])
                                             {
@@ -107,9 +108,21 @@ class ProductCatalog extends React.Component{
                                                     alert("Chỉ còn lại " + remain + " sản phẩm. Vui lòng nhập lại.");
                                                     updated = false;
                                                 }
+                                                exist = true;
                                             }
                                             newCart.push(element);
                                         })
+                                        if (!exist)
+                                        {
+                                            if (parseInt(response['quantity']) <= remain)
+                                            {
+                                                newCart.push(response);
+                                            }
+                                            else
+                                            {
+                                                alert("Chỉ còn lại " + remain + " sản phẩm. Vui lòng nhập lại.");
+                                            }
+                                        }
                                         if (updated)
                                         {   
                                             _this.setState(()=>({
