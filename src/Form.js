@@ -22,21 +22,30 @@ class Form extends React.Component{
 	});
 		$("#alert").click(function(){
 			var name = $("#fullName").val();
+			// $.post({
+			// 	url : "http://localhost/react/test.php",
+			// 	data : {'name' : name},
+			// 	success : function(data){
+			// 		if (name !== '')
+			// 		{					
+			// 			alert(data);
+			// 			$('#submit').click();
+			// 		}
+			// 		else
+			// 		{
+			// 			alert("Please tell me your name.");
+			// 		}
+			// 		alert(data);
+			// 	}
+			// });
 			$.post({
-				url : "http://localhost/react/test.php",
-				data : {"name" : name},
-				success : function(data){
-					if (name !== '')
-					{					
-						alert(data);
-						$('#submit').click();
-					}
-					else
-					{
-						alert("Please tell me your name.");
-					}
+				url : 'http://localhost/react/test.php',
+				data : {'bar' : 1},
+				success : function(data)
+				{
+					alert(data);
 				}
-			});
+			})
 		});
 
 }
@@ -55,6 +64,7 @@ class Form extends React.Component{
 						<DataCheckBox />
 						<DataRadioBox />
 						<GETData />
+						<AlertAJAXTest></AlertAJAXTest>
 					</div>
 					<SubmitButton/>
 				</form>
