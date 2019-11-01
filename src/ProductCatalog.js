@@ -13,9 +13,43 @@ class ProductCatalog extends React.Component{
             quantity : [],
             dataLoaded : false,
             url : 'http://localhost/shopping-cart/index.php',
-            cart : []
+            cart : [],
+            language : 'vi'
         };
+        this.text = {
+            catalogTitle : '',
+            productName : '',
+            price : '',
+            buyBtn : '',
+            checkoutBtn : '',
+            emptyCartBtn : '',
+            language : '',
+            outofstock : '',
+            english : '',
+            vietnamese : '',
+            notEnoughProductPre : '',
+            notEnoughProductAppe : '',
+            noProductAlert : ''
+        }
         this.settingUpEventListeners = this.settingUpEventListeners.bind(this);
+        this.loadText = this.loadText.bind(this);
+        this.changeLang = this.changeLang.bind(this);
+    }
+    changeLang(e)
+    {
+        let lang = e.target.value;
+        this.setState(()=>({
+            language : lang
+        }));
+    }
+    loadText()
+    {
+        let langJSON = require('./language/' + (this.state.language === 'en' ? 'En':'Vi') + '.json');        //condition to import the right language json.
+        // let langJSON = require('./language/En.json');
+        for (let key in this.text)
+        {
+            this.text[key] = langJSON[key];
+        }
     }
     settingUpEventListeners()
     {
@@ -86,7 +120,7 @@ class ProductCatalog extends React.Component{
             }
             else
             {
-                alert("Vui lòng chọn mua sản phẩm để thanh toán.");
+                alert(_this.text.noProductAlert);
             }
         })
         $('.buybtn').on('click', function(){
@@ -119,7 +153,7 @@ class ProductCatalog extends React.Component{
                             }
                             else
                             {
-                                alert("Chỉ còn lại " + remain + " sản phẩm. Vui lòng nhập lại.");
+                                alert(_this.text.notEnoughProductPre + remain + _this.text.notEnoughProductAppe);
                             }
                         }
                         else
@@ -139,7 +173,7 @@ class ProductCatalog extends React.Component{
                                     }
                                     else
                                     {
-                                        alert("Chỉ còn lại " + remain + " sản phẩm. Vui lòng nhập lại.");
+                                        alert(_this.text.notEnoughProductPre + remain + _this.text.notEnoughProductAppe);
                                         updated = false;
                                     }
                                     exist = true;
@@ -157,7 +191,7 @@ class ProductCatalog extends React.Component{
                                 }
                                 else
                                 {
-                                    alert("Chỉ còn lại " + remain + " sản phẩm. Vui lòng nhập lại.");
+                                    alert(_this.text.notEnoughProductPre + remain + _this.text.notEnoughProductAppe);
                                 }
                             }
                             if (updated)
@@ -216,6 +250,8 @@ class ProductCatalog extends React.Component{
     };
     render()
     {
+        this.loadText();
+        console.log(this.text);
         let returned = [];
         if (this.state.dataLoaded)
         {
@@ -223,16 +259,16 @@ class ProductCatalog extends React.Component{
             this.state.image.forEach(function(element, index) {
                 let imgPath = require("./product-images/" + element + ".jpg");
                 returned.push(
-                    <div className = 'container' key = {index}>
+                    <div  key = {index}>
                         <img src = {imgPath} alt = {element} width = "auto" height = "200px"></img>
-                        <p>{_this.state.name[index]}</p>
-                        <p>{_this.state.price[index]}USD</p>
+                        <p>{_this.text.productName}: {_this.state.name[index]}</p>
+                        <p>{_this.text.price}: {_this.state.price[index]}USD</p>
                         {_this.state.quantity[index] !== 0?
-                        <>
+                        <p>
                         <input type = "number" className = 'quantity' id = {_this.state.code[index]} name = {_this.state.code[index]} image = {element} price = {_this.state.price[index]} ></input>
-                        <button type = 'button' className = 'buybtn' code = {_this.state.code[index]}>Buy</button>
-                        </>
-                        : <p><b>Hết hàng</b></p>
+                        <button type = 'button' className = 'buybtn' code = {_this.state.code[index]}>{_this.text.buyBtn}</button>
+                        </p>
+                        : <p><b>{_this.text.outofstock}</b></p>
                         }
                     </div>
                 );
@@ -240,15 +276,26 @@ class ProductCatalog extends React.Component{
             });
         }
         return(
-            <form method = 'POST' action = {this.state.url}>
-                <title>Giỏ hàng siêu đơn giản</title>
-                <h1>
-                    <b>Catalog sản phẩm</b>
+            <form className = 'container'>
+                <div onChange = {e => this.changeLang(e)}>
+                    <p>{this.text.language}</p>
+                    <div className = 'custom-control custom-radio'>
+                        <input type = 'radio' name = 'lang' value = 'en' className = 'custom-control-input' id = 'engLang'></input>
+                        <label className = 'custom-control-label' htmlFor = 'engLang'>{this.text.english}</label>
+                    </div>
+                    <div className = 'custom-control custom-radio'>
+                        <input type = 'radio' name = 'lang' value = 'vi' checked = {this.state.language === 'vi'} className = 'custom-control-input' id = 'vieLang'></input>
+                        <label className = 'custom-control-label' htmlFor = 'vieLang'>{this.text.vietnamese}</label>
+                    </div>                
+                </div>
+
+                <h1 className = 'form-control'>
+                    <b>{this.text.catalogTitle}</b>
                 </h1>
                 {returned}
-                <ShoppingCart url = {this.state.url} cart = {this.state.cart}/>
-                <button type = 'button' id = 'checkoutbtn'>Thanh toán</button>
-                <button type = 'button' id = 'emptyCartBtn'>Xóa tất cả</button>
+                <ShoppingCart url = {this.state.url} cart = {this.state.cart} language = {this.state.language}/>
+                <button type = 'button' id = 'checkoutbtn' className = 'btn btn-outline-primary'>{this.text.checkoutBtn}</button>
+                <button type = 'button' id = 'emptyCartBtn' className = 'btn btn-outline-primary'>{this.text.emptyCartBtn}</button>
             </form>
         );
     }

@@ -1,0 +1,20 @@
+{
+    "catalogTitle" : "Product Catalog",
+    "productName" : "Product name",
+    "price" : "Price",
+    "buyBtn" : "Buy",
+    "cartTitle" : "Your cart",
+    "cartEmptyStatus" : "Your cart is currently empty",
+    "checkoutBtn" : "Checkout",
+    "emptyCartBtn" : "Empty cart",
+    "language" : "Language",
+    "quantity" : "Quantity",
+    "subtotal" : "Subtotal",
+    "total" : "Total",
+    "outofstock" : "Out of stock",
+    "english" : "English",
+    "vietnamese" : "Vietnamese",
+    "notEnoughProductPre" : "Only ",
+    "notEnoughProductAppe" : " product(s) left. Please choose another quantity.",
+    "noProductAlert" : "Please choose a product to buy before proceeding to checkout."
+}
